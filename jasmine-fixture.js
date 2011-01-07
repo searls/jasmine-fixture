@@ -1,3 +1,5 @@
+/* jasmine-fixture Makes injecting HTML snippets into the DOM easy & clean!
+ *  site: https://github.com/searls/jasmine-fixture   */
 (function($){
 	$.jasmine = {
 		isReady: false,
