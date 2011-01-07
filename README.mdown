@@ -1,0 +1,21 @@
+# jasmine-fixture
+
+A simple script to support writing [Jasmine](http://pivotal.github.com/jasmine) by enabling you to easily inject HTML into the DOM. You can grab the latest release at the [Downloads](https://github.com/searls/jasmine-fixture/downloads) page.
+
+## Usage
+
+jasmine-fixture needs to be loaded in the spec runner HTML file after both Jasmine and jQuery, but before your specs.
+
+To inject some HTML into your spec, you can just pass the HTML string to `$.jasmine.inject`:
+
+    beforeEach(function(){
+      $.jasmine.inject('<div id="containerYourCodeReliesOn"></div>');
+    })
+    
+This will append the HTML to a special container div with ID 'specContainer'. After each spec executes, this container div is removed from the DOM to ensure stability across specs. The next time a spec invokes `$.jasmine.inject`, the container will first be re-added to the DOM.
+
+And that's about it.
+
+## Maintainers
+
+* [Justin Searls](http://about.me/searls)
