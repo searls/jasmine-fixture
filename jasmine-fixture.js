@@ -10,7 +10,7 @@
 		},
 		inject:function(html) {
 			if(this.isReady !== true) this.init();
-      $('#'+this.rootId).append(html);
+      return $(html).appendTo('#'+this.rootId);
 		},
 		tidyUp: function() {
 			$('#'+this.rootId).remove();
