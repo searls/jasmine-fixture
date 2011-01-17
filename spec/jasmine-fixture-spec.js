@@ -2,7 +2,7 @@ describe('Jasmine Fixture',function(){
   it('is named $.jasmine',function(){
     expect($.jasmine).toBeDefined();
   });
-  
+
   describe('#inject',function(){
     var result;
     beforeEach(function(){
@@ -12,5 +12,5 @@ describe('Jasmine Fixture',function(){
       expect(result.hasClass('pants')).toBe(true);
     });
   })
-  
+
 });
