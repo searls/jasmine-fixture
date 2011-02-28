@@ -8,7 +8,7 @@ jasmine-fixture needs to be loaded in the spec runner HTML file after both Jasmi
 
 To inject some HTML into your spec, you can just pass the HTML string to `$.jasmine.inject`:
 
-    var $container
+    var $container;
     beforeEach(function(){
       $container = $.jasmine.inject('<div id="containerYourCodeReliesOn"></div>');
     })
