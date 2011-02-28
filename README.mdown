@@ -4,13 +4,18 @@ A simple script to support writing [Jasmine](http://pivotal.github.com/jasmine) 
 
 ## Usage
 
-jasmine-fixture needs to be loaded in the spec runner HTML file after both Jasmine and jQuery, but before your specs.
+jasmine-fixture needs to be loaded in the spec runner HTML file after both Jasmine and jQuery, but before your specs. It plays really nicely with [jasmine-jquery](https://github.com/velesin/jasmine-jquery) too.
 
 To inject some HTML into your spec, you can just pass the HTML string to `$.jasmine.inject`:
 
+    var $container
     beforeEach(function(){
-      $.jasmine.inject('<div id="containerYourCodeReliesOn"></div>');
+      $container = $.jasmine.inject('<div id="containerYourCodeReliesOn"></div>');
     })
+    
+    it('is visible',function(){
+      expect($container).toBeVisible(); //requires https://github.com/velesin/jasmine-jquery
+    });
     
 This will append the HTML to a special container div with ID 'specContainer'. After each spec executes, this container div is removed from the DOM to ensure stability across specs. The next time a spec invokes `$.jasmine.inject`, the container will first be re-added to the DOM.
 
