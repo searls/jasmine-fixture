@@ -100,8 +100,14 @@ describe('Jasmine Fixture',function(){
           });
 
           context("and inject is passed a string", function() {
+            beforeEach(function() {
+              $result = $.jasmine.inject('sauce');
+            });
             it("uses those defaults, but changes the class", function() {
-
+              expect($result).toIs('input#frog.sauce');
+            });
+            it("even sets the text", function() {
+              expect($result.text()).toEqual('&&');
             });
           });
 
