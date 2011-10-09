@@ -14,7 +14,7 @@ If I'm rolling my own spec runner HTML, that might look like this:
   <script type="text/javascript" src="../lib/jasmine-fixture.js"></script>
 ```
 
-Also, if window.inject isn't being used by anything else, I suggest sticking aliasing it to $.jasmine.inject to save on keystrokes, like so:
+Also, if window.inject isn't being used by anything else, I suggest aliasing it to $.jasmine.inject to save on keystrokes, like so:
 
 ``` javascript
 window.inject = $.jasmine.inject
