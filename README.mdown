@@ -14,29 +14,6 @@ If I'm rolling my own spec runner HTML, that might look like this:
   <script type="text/javascript" src="../lib/jasmine-fixture.js"></script>
 ```
 
-### Configure it
-
-I do a little setup for jasmine-fixture in a spec helper that runs before my specs.
-
-``` javascript
-
-(function($){
-  window.inject = $.jasmine.inject;  //if your namespace allows, 'inject()' saves keystrokes
-
-  //Below are jasmine-fixture's defaults
-  $.jasmine.configure({
-    el:'div',                 // HTML element to be injected
-    cssClass:'',              // HTML class attribute (string-wrapped 'class' can also be used)
-    id:'',                    // HTML id attribute
-    text: '',                 // the text within the HTML element
-    defaultAttribute: 'class' // when inject() is only passed a string, it'll be set on this attribute
-  });
-})(jQuery);
-
-```
-
-The defaults passed to `configure` will be applied on all subsequent calls to `inject()`. If you happen to select elements by id more often than class, then changing "defaultAttribute" to "id" would make good sense. (As you'll read below, that setting would allow you to say `inject('panda')` to inject an element with ID "panda".)
-
 ### Use it
 
 #### Basic
@@ -46,7 +23,7 @@ At its simplest, calling inject with a string argument will inject a `<div>` wit
 ``` javascript
 
 beforeEach(function(){
-  $container = inject('add-item')
+  $container = inject('add-item');
 });
 
 ```
@@ -120,6 +97,30 @@ This would yield the following markup being injected into the DOM:
 
 Worth noting, one only needs to specify the parameters that the spec requires (it would be odd to need all of the options at once).
 
+
+### Configure it
+
+I do a little setup for jasmine-fixture in a spec helper that runs before my specs.
+
+``` javascript
+
+(function($){
+  window.inject = $.jasmine.inject;  //if your namespace allows, 'inject()' saves keystrokes
+
+  //Below are jasmine-fixture's defaults
+  $.jasmine.configure({
+    el:'div',                 // HTML element to be injected
+    cssClass:'',              // HTML class attribute (string-wrapped 'class' can also be used)
+    id:'',                    // HTML id attribute
+    text: '',                 // the text within the HTML element
+    defaultAttribute: 'class' // when inject() is only passed a string, it'll be set on this attribute
+  });
+})(jQuery);
+
+```
+
+The defaults passed to `configure` will be applied on all subsequent calls to `inject()`. If you happen to select elements by id more often than class, then changing "defaultAttribute" to "id" would make good sense. (As you'll read below, that setting would allow you to say `inject('panda')` to inject an element with ID "panda".)
+
 ### Other notes
 
 #### Multiple jQuery versions
@@ -128,7 +129,7 @@ jasmine-fixture supports dealing with multiple versions of jQuery. By default, i
 
 ``` javascript
 
-jasmineFixture(jQuery_1_4_2_)
+jasmineFixture(jQuery_1_4_2_);
 
 ```
 
