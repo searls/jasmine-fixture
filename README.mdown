@@ -14,15 +14,18 @@ If I'm rolling my own spec runner HTML, that might look like this:
   <script type="text/javascript" src="../lib/jasmine-fixture.js"></script>
 ```
 
-### Use it
-
-First things first, if window.inject isn't being used by anything else, I suggest sticking aliasing it to $.jasmine.inject to save on keystrokes, like so: 
+Also, if window.inject isn't being used by anything else, I suggest sticking aliasing it to $.jasmine.inject to save on keystrokes, like so:
 
 ``` javascript
 
 window.inject = $.jasmine.inject
 
 ```
+
+**Fair warning: all the examples below assume that you've aliased $.jasmine.inject to window.inject**
+
+### Use it
+
 
 #### Basic
 
@@ -113,7 +116,7 @@ You might want to setup jasmine-fixture in a spec helper that runs before my spe
 ``` javascript
 
 (function($){
-  window.inject = $.jasmine.inject; 
+  window.inject = $.jasmine.inject;
 
   //Below are jasmine-fixture's defaults
   $.jasmine.configure({
