@@ -17,9 +17,7 @@ If I'm rolling my own spec runner HTML, that might look like this:
 Also, if window.inject isn't being used by anything else, I suggest sticking aliasing it to $.jasmine.inject to save on keystrokes, like so:
 
 ``` javascript
-
 window.inject = $.jasmine.inject
-
 ```
 
 **Fair warning: all the examples below assume that you've aliased $.jasmine.inject to window.inject**
@@ -32,11 +30,9 @@ window.inject = $.jasmine.inject
 At its simplest, calling inject with a string argument will inject a `<div>` with the string set to the class attribute
 
 ``` javascript
-
 beforeEach(function(){
   $container = inject('add-item');
 });
-
 ```
 
 Therefore, the above will inject `<div class="add-item"></div>` to a special sandbox div in the DOM. It will be tidied up for you `afterEach` spec executes. `inject` will return a jQuery result object that includes the injected element.
@@ -48,21 +44,17 @@ You can also chain calls to inject (that is, jasmine-fixture defines `$.fn.injec
 So you could write:
 
 ``` javascript
-
 beforeEach(function(){
   $input = inject('my-form').inject({el: 'input'});
 });
-
 ```
 
 The above will inject something like this:
 
 ``` html
-
 <div class="my-form">
   <input></input>
 </div>
-
 ```
 
 And the return value will be of the input, not the containing form. That makes it easier to keep the fixture code to a minimal--since your expectations will usually be about the most deeply-nested thing in your fixture markup.
@@ -72,11 +64,9 @@ And the return value will be of the input, not the containing form. That makes i
 Of course, you can also inject raw HTML into the DOM. That's as easy as passing a string of HTML to `inject`
 
 ``` javascript
-
 beforeEach(function(){
   $input = inject('<div><span><b>Bold!</b></span></div>')
 });
-
 ```
 
 And that'll work exactly as you'd expect it to.
@@ -86,7 +76,6 @@ And that'll work exactly as you'd expect it to.
 When you need to inject something more complex than a div with a CSS class, you can customize the element that gets injected to some extent.
 
 ``` javascript
-
 beforeEach(function() {
   $span = inject({
     el: 'span',
@@ -95,15 +84,12 @@ beforeEach(function() {
     text: "oh hai, i'm some <escaped>text</escaped>"
   });
 });
-
 ```
 
 This would yield the following markup being injected into the DOM:
 
 ``` html
-
 <span id="door" class="open closed">oh hai, i'm some &lt;escaped&gt;text&lt;/escaped&gt;</span>
-
 ```
 
 Worth noting, one only needs to specify the parameters that the spec requires (it would be odd to need all of the options at once).
@@ -114,7 +100,6 @@ Worth noting, one only needs to specify the parameters that the spec requires (i
 You might want to setup jasmine-fixture in a spec helper that runs before my specs.
 
 ``` javascript
-
 (function($){
   window.inject = $.jasmine.inject;
 
@@ -127,7 +112,6 @@ You might want to setup jasmine-fixture in a spec helper that runs before my spe
     defaultAttribute: 'class' // when inject() is only passed a string, it'll be set on this attribute
   });
 })(jQuery);
-
 ```
 
 The defaults passed to `configure` will be applied on all subsequent calls to `inject()`. If you happen to select elements by id more often than class, then changing "defaultAttribute" to "id" would make good sense. (As you'll read below, that setting would allow you to say `inject('panda')` to inject an element with ID "panda".)
@@ -139,9 +123,7 @@ The defaults passed to `configure` will be applied on all subsequent calls to `i
 jasmine-fixture supports dealing with multiple versions of jQuery. By default, it'll set itself up on the instance of jQuery that owns `window.jQuery` at the time that its script is run. But if you want to add jasmine-fixture to an additional version of jQuery, just execute something like:
 
 ``` javascript
-
 jasmineFixture(jQuery_1_4_2_);
-
 ```
 
 And this will have the effect of adding a new `jQuery_1_4_2_.jasmine.inject`, which will only depend on *that* instance of jQuery and not the page's default.
