@@ -73,9 +73,20 @@ describe('Jasmine Fixture',function(){
             expect($result.text()).toEqual("oh hai, i'm some <escaped>text</escaped>");
           });
         });
+
+        context("passed a properly quoted 'class' property in the config object", function() {
+          beforeEach(function() {
+            $result = $.jasmine.inject({ 'class': 'burger' });
+          });
+
+          it("applies the css class", function() {
+            expect($result).toIs('.burger');
+          });
+        });
+
       });
 
-      describe("#config", function() {
+      describe("#configure", function() {
         var $result;
         context("configured custom defaults", function() {
           beforeEach(function() {
@@ -104,6 +115,7 @@ describe('Jasmine Fixture',function(){
               $result = $.jasmine.inject('sauce');
             });
             it("uses those defaults, but changes the class", function() {
+
               expect($result).toIs('input#frog.sauce');
             });
             it("even sets the text", function() {
@@ -114,8 +126,13 @@ describe('Jasmine Fixture',function(){
         });
 
         context("configured that when given a string it should inject the id", function() {
-          it("sets the id and not the class", function() {
+          beforeEach(function() {
+            $.jasmine.configure({ defaultAttribute: 'id' });
 
+            $result = $.jasmine.inject('foo');
+          });
+          xit("sets the id and not the class", function() {
+            expect($result).toIs('#foo');
           });
         });
       });
