@@ -16,6 +16,14 @@ If I'm rolling my own spec runner HTML, that might look like this:
 
 ### Use it
 
+First things first, if window.inject isn't being used by anything else, I suggest sticking aliasing it to $.jasmine.inject to save on keystrokes, like so: 
+
+``` javascript
+
+window.inject = $.jasmine.inject
+
+```
+
 #### Basic
 
 At its simplest, calling inject with a string argument will inject a `<div>` with the string set to the class attribute
@@ -100,12 +108,12 @@ Worth noting, one only needs to specify the parameters that the spec requires (i
 
 ### Configure it
 
-I do a little setup for jasmine-fixture in a spec helper that runs before my specs.
+You might want to setup jasmine-fixture in a spec helper that runs before my specs.
 
 ``` javascript
 
 (function($){
-  window.inject = $.jasmine.inject;  //if your namespace allows, 'inject()' saves keystrokes
+  window.inject = $.jasmine.inject; 
 
   //Below are jasmine-fixture's defaults
   $.jasmine.configure({
