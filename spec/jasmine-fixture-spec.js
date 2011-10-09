@@ -1,45 +1,90 @@
 window.context = window.describe;
 window.xcontext = window.xdescribe;
 
+beforeEach(function() {
+  this.addMatchers({
+    toIs: function(selector) {
+      return this.actual.is(selector);
+    },
+    toHas: function(selector) {
+      return this.actual.find(selector).length > 0;
+    },
+    toExist: function() {
+      if(this.actual.constructor === String) {
+        return $(this.actual).length > 0;
+      } else {
+        return $.contains(document.body,$(this.actual)[0]);
+      }
+    }
+  });
+});
+
 describe('Jasmine Fixture',function(){
   var itInjectsStuff = function($) {
-    it('is named $.jasmine',function(){
-      expect($.jasmine).toBeDefined();
+
+    describe("$.jasmine", function() {
+      it('is named $.jasmine',function(){
+        expect($.jasmine).toBeDefined();
+      });
+
+      describe('#inject',function(){
+        var $result;
+
+        context('provided an HTML string', function(){
+          beforeEach(function(){
+           $result = $.jasmine.inject('<div class="pants"></div>');
+          });
+
+          it('returns the injected HTML as a jQuery result',function(){
+            expect($result).toIs('div.pants');
+          });
+        });
+
+        context('provided a string argument', function(){
+          beforeEach(function(){
+            $result = $.jasmine.inject('pants');
+          });
+
+          it('is a div',function(){
+            expect($result).toIs('div')
+          });
+
+          it('uses the passed string as its class', function(){
+            expect($result).toIs('.pants');
+          });
+
+          it('is contained by the body', function(){
+            expect($result).toExist();
+          });
+        });
+
+        xcontext("provided a config object", function() {
+          beforeEach(function() {
+            $result = $.jasmine.inject({
+              el: 'input',
+              cssClass: 'open closed',
+              id: 'door'
+            });
+          });
+
+          it("is of the specified element type", function() {
+            expect($result).toIs('input');
+          });
+
+
+        });
+      });
+
+      describe("#config", function() {
+        context("configuring 'span' as the default injected element", function() {
+
+        });
+
+        context("configuring 'id' as the default attribute", function() {
+
+        });
+      });
     });
-
-    describe('#inject',function(){
-      var $result;
-
-      context('provided an HTML string', function(){
-        beforeEach(function(){
-         $result = $.jasmine.inject('<div class="pants"></div>');
-        });
-
-        it('returns the injected HTML as a jQuery result',function(){
-          expect($result.is('div.pants')).toBe(true);
-        });
-      });
-
-      context('provided a string argument', function(){
-        beforeEach(function(){
-          $result = $.jasmine.inject('pants');
-        });
-
-        it('is a div',function(){
-          expect($result.is('div')).toBe(true);
-        });
-
-        it('uses the passed string as its id', function(){
-          expect($result.hasClass('pants')).toBe(true);
-        });
-
-        it('is contained by the body', function(){
-          expect($.contains(document.body,$result[0])).toBe(true);
-        });
-      });
-
-
-    })
 
     describe("$.fn.inject",function(){
       var $container,$result;
@@ -50,17 +95,17 @@ describe('Jasmine Fixture',function(){
       });
 
       it('appends the injected as a child of the container',function(){
-        expect($container.find('.fax').length).toBe(1);
+        expect($container).toHas('.fax');
       });
 
       it('returns the child (even though an idiomatic jQuery function would return the original set)',function(){
-        expect($result.is('.fax')).toBe(true);
+        expect($result).toIs('.fax');
       });
     });
 
 
     it("afterward, it tidies up (the page no longer contains the injected content on the page)", function() {
-      expect($('.pants').length).toBe(0);
+      expect('.pants').not.toExist();
     });
 
     describe("#noConflict", function() {
