@@ -52,6 +52,10 @@ describe('Jasmine Fixture',function(){
       it('appends the injected as a child of the container',function(){
         expect($container.find('.fax').length).toBe(1);
       });
+
+      it('returns the child (even though an idiomatic jQuery function would return the original set)',function(){
+        expect($result.is('.fax')).toBe(true);
+      });
     });
 
 
