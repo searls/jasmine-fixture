@@ -45,12 +45,9 @@ describe('Jasmine Fixture',function(){
             $result = $.jasmine.inject('pants');
           });
 
-          it('is a div',function(){
-            expect($result).toIs('div')
-          });
 
           it('uses the passed string as its class', function(){
-            expect($result).toIs('.pants');
+            expect($result).toIs('div.pants');
           });
 
           it('is contained by the body', function(){
@@ -58,30 +55,62 @@ describe('Jasmine Fixture',function(){
           });
         });
 
-        xcontext("provided a config object", function() {
+        context("provided a config object", function() {
           beforeEach(function() {
             $result = $.jasmine.inject({
               el: 'input',
               cssClass: 'open closed',
-              id: 'door'
+              id: 'door',
+              text: "oh hai, i'm some <escaped>text</escaped>"
             });
           });
 
-          it("is of the specified element type", function() {
-            expect($result).toIs('input');
+          it("is injected as configured", function() {
+            expect($result).toIs('input#door.open.closed');
           });
 
-
+          it("contains the configured text", function() {
+            expect($result.text()).toEqual("oh hai, i'm some <escaped>text</escaped>");
+          });
         });
       });
 
       describe("#config", function() {
-        context("configuring 'span' as the default injected element", function() {
+        var $result;
+        context("configured custom defaults", function() {
+          beforeEach(function() {
+            $.jasmine.configure({
+              el: 'input',
+              cssClass: 'party',
+              id: 'frog',
+              text: '&&'
+            })
+          });
+
+          context("and inject is passed nothing", function() {
+            beforeEach(function() {
+              $result = $.jasmine.inject();
+            });
+            it("uses those defaults", function() {
+              expect($result).toIs('input#frog.party');
+            });
+            it("even sets the text", function() {
+              expect($result.text()).toEqual('&&');
+            });
+          });
+
+          context("and inject is passed a string", function() {
+            it("uses those defaults, but changes the class", function() {
+
+            });
+          });
 
         });
 
-        context("configuring 'id' as the default attribute", function() {
+        context("configured that when given a string it should inject the id", function() {
+          it("sets the id and not the class", function() {
 
+          });
         });
       });
     });
@@ -102,7 +131,6 @@ describe('Jasmine Fixture',function(){
         expect($result).toIs('.fax');
       });
     });
-
 
     it("afterward, it tidies up (the page no longer contains the injected content on the page)", function() {
       expect('.pants').not.toExist();
@@ -127,7 +155,7 @@ describe('Jasmine Fixture',function(){
       });
 
       it("returns control of jasmineFixture to the thing that owned it first", function() {
-        //see the specRunner for the source to this magic string
+        //see the specRunner HTML for the source to this magic string
         expect(window.jasmineFixture).toEqual("Thing that owned jasmineFixture first");
       });
     });
