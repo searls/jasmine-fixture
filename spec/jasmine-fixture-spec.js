@@ -135,6 +135,25 @@ describe('Jasmine Fixture',function(){
             expect($result).toIs('#foo');
           });
         });
+
+      });
+
+      describe("#restoreDefauls", function() {
+        context("injecting elements", function() {
+          it("retains the previous configuration, until called", function() {
+            var result = $.jasmine.inject();
+            expect(result).toIs('input#frog.party');
+          });
+        });
+        context("when called", function() {
+          var $result; 
+
+          it("should revert back to the defaults when injecting new items", function() {
+            $.jasmine.restoreDefaults(); 
+            $result = $.jasmine.inject('cheezburger');
+            expect($result).toIs('div.cheezburger');
+          });
+        });
       });
     });
 
