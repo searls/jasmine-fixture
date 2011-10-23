@@ -116,6 +116,8 @@ You might want to setup jasmine-fixture in a spec helper that runs before all of
 
 The defaults passed to `configure` will be applied on all subsequent calls to `inject()`. If you happen to select elements by id more often than class, then changing "defaultAttribute" to "id" would make good sense. (As you'll read below, that setting would allow you to say `inject('panda')` to inject an element with ID "panda".)
 
+Thanks to a pull request from [@kchien](https://github.com/kchien), you can also restore the original default behavior with `$.jasmine.restoreDefaults()`.
+
 ### Other notes
 
 #### Multiple jQuery versions
