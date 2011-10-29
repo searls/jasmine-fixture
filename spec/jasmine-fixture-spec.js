@@ -84,6 +84,15 @@ describe('Jasmine Fixture',function(){
           });
         });
 
+        context("passed additional attributes to be applied in the config object", function() {
+          beforeEach(function() {
+            $result = $.jasmine.inject({ el: 'script', attributes: { type: 'text/template' } });
+          });
+
+          it("applies the additional attributes", function() {
+            expect($result.attr('type')).toEqual('text/template');
+          });
+        });
       });
 
       describe("#configure", function() {
