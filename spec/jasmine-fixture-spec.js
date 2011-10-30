@@ -219,8 +219,11 @@ describe('Jasmine Fixture',function(){
     });
   };
 
-  itInjectsStuff(jQuery);
+  it("assigns window.inject to the first jQuery it sees", function() {
+    expect(window.inject).toBe(jQuery.jasmine.inject);
+  });
 
+  itInjectsStuff(jQuery);
   jasmineFixture(jQuery_1_6_4);
   itInjectsStuff(jQuery_1_6_4);
 });

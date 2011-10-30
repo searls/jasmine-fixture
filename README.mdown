@@ -14,13 +14,13 @@ If I'm rolling my own spec runner HTML, that might look like this:
   <script type="text/javascript" src="../lib/jasmine-fixture.js"></script>
 ```
 
-Also, if window.inject isn't being used by anything else, I suggest aliasing it to $.jasmine.inject to save on keystrokes, like so:
+Also, if window.inject isn't being used by anything else, jasmine-fixture will automatically assign it to $.jasmine.inject. If you're dealing with multiple versions of jQuery, you may care to remove or change this alias as necessary.
 
 ``` javascript
 window.inject = $.jasmine.inject
 ```
 
-**Fair warning: all the examples below assume that you've aliased $.jasmine.inject to window.inject**
+Nevertheless, all examples below assume that window.inject is an alias of $.jasmine.inject.
 
 ### Usage
 
