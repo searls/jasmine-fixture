@@ -81,7 +81,8 @@ beforeEach(function() {
     el: 'span',
     'class': 'open closed',
     id: 'door',
-    text: "oh hai, i'm some <escaped>text</escaped>"
+    text: "oh hai, i'm some <escaped>text</escaped>",
+    attrs: { title: "42" }
   });
 });
 ```
@@ -89,7 +90,7 @@ beforeEach(function() {
 This would yield the following markup being injected into the DOM:
 
 ``` html
-<span id="door" class="open closed">oh hai, i'm some &lt;escaped&gt;text&lt;/escaped&gt;</span>
+<span id="door" class="open closed" title="42">oh hai, i'm some &lt;escaped&gt;text&lt;/escaped&gt;</span>
 ```
 
 Worth noting, one rarely needs to specify all of the parameters at once; jasmine-fixture will fall back on its defaults where you don't specify a value (see below).
