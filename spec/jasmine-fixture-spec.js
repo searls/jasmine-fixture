@@ -74,6 +74,25 @@ describe('Jasmine Fixture',function(){
           });
         });
 
+        context("embedding HTML", function() {
+          beforeEach(function() {
+            $result = $.jasmine.inject({
+              html: 'oh hi, <span class="oh-yeah">text</span>'
+            });
+          });
+
+          it("contains the injected span", function() {
+            expect($result).toHas('.oh-yeah');
+          });
+
+        });
+
+        context("specifying both text & html", function() {
+          it("throws an error", function() {
+            expect(function() { $.jasmine.inject({ html: 'HTML', text: 'TEXT' }); }).toThrow("Error: because they conflict, you may only configure inject() to set `html` or `text`, not both! \n\nHTML was: HTML \n\n Text was: TEXT");
+          });
+        });
+
         context("passed a properly quoted 'class' property in the config object", function() {
           beforeEach(function() {
             $result = $.jasmine.inject({ 'class': 'burger' });
