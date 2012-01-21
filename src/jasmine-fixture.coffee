@@ -4,14 +4,6 @@
   originalJasmineFixture = window.jasmineFixture
   originalInject = window.inject
   originalAffix = window.affix
-  defaultConfiguration =
-    el: "div"
-    cssClass: ""
-    id: ""
-    text: ""
-    html: ""
-    defaultAttribute: "class"
-    attrs: {}
 
   window.jasmineFixture = ($) ->
     #--------------------------------------------------------
@@ -43,6 +35,14 @@
     # #inject (jasmine-fixture 1.x)
     isReady = false
     rootId = "specContainer"
+    defaultConfiguration =
+      el: "div"
+      cssClass: ""
+      id: ""
+      text: ""
+      html: ""
+      defaultAttribute: "class"
+      attrs: {}
     defaults = $.extend({}, defaultConfiguration)
     $.jasmine =
       inject: (arg, context) ->
@@ -106,10 +106,7 @@
       isReady = false
 
     $(($) -> init())
-
-    afterEach ->
-      tidyUp()
-
+    afterEach -> tidyUp()
     $.jasmine
 
   if $
