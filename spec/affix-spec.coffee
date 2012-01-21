@@ -9,24 +9,21 @@ describe "jasmine-fixture 2.x", ->
           $.contains('body',this.actual) && $result.is(this.actual)
 
     EXAMPLES = [
-      '.foo',
-      '.bar',
-      '#baz',
-      '#foo .panda',
-      'input#man .restroom',
-      '.pants.zipper',
-      'span#spaghetti.sauce',
-      # 'article.sauce#spaghetti',
-      # 'foo > bar'
-      # input[value=12]
-      # .sauce:eq(23)
+      '.foo'
+      '.bar'
+      '#baz'
+      '#foo .panda'
+      'input#man .restroom'
+      '.pants.zipper'
+      'span#spaghetti.sauce'
+      'article.sauce#spaghetti'
+      'foo > bar'
+      'input[value="12"]'
     ]
 
     _(EXAMPLES).each (selector) ->
       Then -> expect(selector).toInjectProperly()
       Then -> expect($('body')).not.toHas(selector)
-
-
 
     context "chaining", ->
       Given -> @$container = affix('.container')
