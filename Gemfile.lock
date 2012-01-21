@@ -1,0 +1,33 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.1.2)
+    execjs (1.2.9)
+      multi_json (~> 1.0)
+    git (1.2.5)
+    jasmine-core (1.2.0.rc1)
+    jasmine-headless-webkit (0.7.1)
+      coffee-script (>= 2.2)
+      jasmine-core (~> 1.1.beta)
+      multi_json
+      rainbow
+    js_rake_tasks (0.0.1)
+      git (~> 1.2.5)
+      json_pure (~> 1.6.1)
+      semver (~> 1.0.1)
+    json_pure (1.6.5)
+    multi_json (1.0.3)
+    rainbow (1.1.1)
+    rake (0.8.7)
+    semver (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  jasmine-headless-webkit
+  js_rake_tasks
+  rake
