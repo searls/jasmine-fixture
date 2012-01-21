@@ -2,6 +2,8 @@
 # site: https://github.com/searls/jasmine-fixture
 (($) ->
   originalJasmineFixture = window.jasmineFixture
+  originalInject = window.inject
+  originalAffix = window.affix
   defaultConfiguration =
     el: "div"
     cssClass: ""
@@ -12,6 +14,33 @@
     attrs: {}
 
   window.jasmineFixture = ($) ->
+    #--------------------------------------------------------
+    # #affix (jasmine-fixture 2.x)
+    $.fn.affix = window.affix = (selectorOptions) ->
+      _(selectorOptions.split(' ')).inject(($parent, elementSelector) ->
+        elementSplit = elementSelector.split('#')
+        elementName = elementSplit[0] if elementSplit.length > 1
+
+        idSplit = if elementSplit.length > 1 then elementSplit[1].split('.') else elementSelector.split('.')
+        id = idSplit[0]
+        classes = _(idSplit).rest()
+
+        $("<#{elementName || "div"} id=\"#{id}\" class=\"#{classes.join(' ')}\"></div>").appendTo($parent)
+      , $whatsTheRootOf(this))
+
+    $whatsTheRootOf = (that) ->
+      if that.jquery?
+        that
+      else if $('#jasmine_content').length > 0
+        $('#jasmine_content')
+      else
+        $('<div id="jasmine_content"></div>').appendTo('body')
+
+    afterEach ->
+      $('#jasmine_content').remove()
+
+    #--------------------------------------------------------
+    # #inject (jasmine-fixture 1.x)
     isReady = false
     rootId = "specContainer"
     defaults = $.extend({}, defaultConfiguration)
@@ -39,6 +68,8 @@
 
       noConflict: ->
         window.jasmineFixture = originalJasmineFixture
+        window.inject = originalInject
+        window.affix = originalAffix
         this
 
     $.fn.inject = (html) ->
@@ -74,15 +105,14 @@
       $("#" + rootId).remove()
       isReady = false
 
-    $ (jQuery) ->
-      init()
+    $(($) -> init())
 
     afterEach ->
       tidyUp()
 
     $.jasmine
 
-  if jQuery
-    jasmineFixture = window.jasmineFixture(jQuery)
+  if $
+    jasmineFixture = window.jasmineFixture($)
     window.inject = window.inject or jasmineFixture.inject
 ) jQuery

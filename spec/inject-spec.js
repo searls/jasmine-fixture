@@ -1,25 +1,4 @@
-window.context = window.describe;
-window.xcontext = window.xdescribe;
-
-beforeEach(function() {
-  this.addMatchers({
-    toIs: function(selector) {
-      return this.actual.is(selector);
-    },
-    toHas: function(selector) {
-      return this.actual.find(selector).length > 0;
-    },
-    toExist: function() {
-      if(this.actual.constructor === String) {
-        return $(this.actual).length > 0;
-      } else {
-        return $.contains(document.body,$(this.actual)[0]);
-      }
-    }
-  });
-});
-
-describe('Jasmine Fixture',function(){
+describe('jasmine-fixture 1.x',function(){
   var itInjectsStuff = function($) {
 
     describe("$.jasmine", function() {
@@ -235,6 +214,14 @@ describe('Jasmine Fixture',function(){
       it("returns control of jasmineFixture to the thing that owned it first", function() {
         //see the specRunner HTML for the source to this magic string
         expect(window.jasmineFixture).toEqual("Thing that owned jasmineFixture first");
+      });
+
+      it("clears window.inject", function() {
+        expect(window.inject).not.toBeDefined();
+      });
+
+      it("clears window.affix", function() {
+        expect(window.affix).not.toBeDefined();
       });
     });
   };
