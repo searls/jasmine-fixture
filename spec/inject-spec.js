@@ -1,4 +1,4 @@
-describe('jasmine-fixture 1.x',function(){
+describe('jasmine-fixture 0.x',function(){
   var itInjectsStuff = function($) {
 
     describe("$.jasmine", function() {

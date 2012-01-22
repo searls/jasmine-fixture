@@ -9,12 +9,16 @@ site: https://github.com/searls/jasmine-fixture
 
   window.jasmineFixture = ($) ->
     #--------------------------------------------------------
-    # #affix (jasmine-fixture 2.x)
+    # #affix (jasmine-fixture 1.x)
     $.fn.affix = window.affix = (selectorOptions) ->
+      $top=null
       _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
-        createHTMLBlock($,elementSelector).appendTo($parent)
+        $el = createHTMLBlock($,elementSelector).appendTo($parent)
+        $top ||= $el
+        $el
       , $whatsTheRootOf(this))
+      $top
 
     $whatsTheRootOf = (that) ->
       if that.jquery?
@@ -28,7 +32,7 @@ site: https://github.com/searls/jasmine-fixture
       $('#jasmine_content').remove()
 
     #--------------------------------------------------------
-    # #inject (jasmine-fixture 1.x)
+    # #inject (jasmine-fixture 0.x)
     isReady = false
     rootId = "specContainer"
     defaultConfiguration =

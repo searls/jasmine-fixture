@@ -15,10 +15,16 @@ site: https://github.com/searls/jasmine-fixture
     window.jasmineFixture = function($) {
       var $whatsTheRootOf, applyAttributes, defaultConfiguration, defaults, init, injectContents, isReady, isString, itLooksLikeHtml, rootId, tidyUp;
       $.fn.affix = window.affix = function(selectorOptions) {
-        return _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
+        var $top;
+        $top = null;
+        _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
+          var $el;
           if (elementSelector === ">") return $parent;
-          return createHTMLBlock($, elementSelector).appendTo($parent);
+          $el = createHTMLBlock($, elementSelector).appendTo($parent);
+          $top || ($top = $el);
+          return $el;
         }, $whatsTheRootOf(this));
+        return $top;
       };
       $whatsTheRootOf = function(that) {
         if (that.jquery != null) {

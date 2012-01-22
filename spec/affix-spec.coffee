@@ -1,4 +1,4 @@
-describe "jasmine-fixture 2.x", ->
+describe "jasmine-fixture 1.x", ->
 
   describe "affix", ->
     beforeEach ->
@@ -6,11 +6,12 @@ describe "jasmine-fixture 2.x", ->
       this.addMatchers
         toInjectProperly: ->
           $result = affix(this.actual)
-          $(this.actual).length > 0 and $result.is(this.actual)
+          $(this.actual).length > 0 and $.contains($result.parent(),this.actual)
 
     EXAMPLES = [
       'span'                                                                  #<span></span>
       '.foo'                                                                  #<div class="foo"></div>
+      '.foo-hah'                                                              #<div class="foo-hah"></div>
       '#baz'                                                                  #<div id="baz"></div>
       'h1.foo'                                                                #<h1 class="foo"></h1>
       'h2#baz'                                                                #<h2 id="baz"></h2>
@@ -28,6 +29,7 @@ describe "jasmine-fixture 2.x", ->
       'form fieldset[name=ok] input#foo.sp1.sp1[foo="woo"][value="13"]'       #<form><fieldset name="ok"><input foo="woo" value="13" id="foo" class="sp1 sp1"></fieldset></form>
       '[name="foo"][bar="baz"]'                                               #<name name="foo" bar="baz"></name>
       'div[data-bind="my_item"]'                                              #<div data-bind="my_item"></div>
+      '.ui-dialog[style="width: 1px; height: 5px"]'                           #<div style="width: 1px; height: 5px" class="ui-dialog"></div>
       '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
     ]
 
@@ -43,6 +45,10 @@ describe "jasmine-fixture 2.x", ->
       Given -> @$result = affix('[name=foo]')
       Then -> expect($('body')).toHas('[name=foo]')
       Then -> expect(@$result).toIs('[name=foo]')
+
+    context "nesting returns", ->
+      Given -> @$result = affix('table.sp_record tbody tr')
+      Then -> expect(@$result).toIs('table')
 
     context "chaining", ->
       Given -> @$container = affix('.container')
