@@ -102,9 +102,6 @@
     $(($) -> init())
     afterEach -> tidyUp()
 
-
-
-
     $.jasmine
 
   if $
