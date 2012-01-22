@@ -101,6 +101,9 @@ I heard you wanted more examples. Here are some examples pulled from `affix`'s [
 '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
 ```
 
+# Thanks
+
+I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing most of this (classes, ids, elements, etc.).
 
 # Deprecation Notice
 
