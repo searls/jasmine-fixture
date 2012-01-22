@@ -23,7 +23,8 @@ describe "jasmine-fixture 2.x", ->
       'article.sauce#spaghetti'
       'foo > bar'
       'input[value="12"]'
-      'input#foo.sp1.sp1[value="13"]'
+      'form fieldset[name="ok"] input#foo.sp1.sp1[foo="woo"][value="13"]'
+      '[name="foo"][bar="baz"]'
     ]
 
     _(EXAMPLES).each (selector) ->
@@ -36,7 +37,8 @@ describe "jasmine-fixture 2.x", ->
 
     context "multiple attrs", ->
       Given -> @$result = affix('[name="foo"][bar="baz"]')
-      Then -> expect(@$result).toIs('[name=foo][bar=baz]')
+      Then -> expect($('body')).toHas('[name="foo"][bar="baz"]')
+      Then -> expect(@$result).toIs('[name="foo"][bar="baz"]')
 
     context "chaining", ->
       Given -> @$container = affix('.container')
