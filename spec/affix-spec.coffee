@@ -24,6 +24,7 @@ describe "jasmine-fixture 2.x", ->
       '.pants.zipper'
       'foo > bar > baz'
       'input[value="12"]'
+      'div[class="class1 class2 class3"] span[div="div1 div2 div3"]'
       'form fieldset[name=ok] input#foo.sp1.sp1[foo="woo"][value="13"]'
       '[name="foo"][bar="baz"]'
     ]

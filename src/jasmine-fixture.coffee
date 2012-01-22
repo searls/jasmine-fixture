@@ -9,7 +9,7 @@
     #--------------------------------------------------------
     # #affix (jasmine-fixture 2.x)
     $.fn.affix = window.affix = (selectorOptions) ->
-      _(selectorOptions.split(' ')).inject(($parent, elementSelector) ->
+      _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
         createHTMLBlock($,elementSelector).appendTo($parent)
       , $whatsTheRootOf(this))
