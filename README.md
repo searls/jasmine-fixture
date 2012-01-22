@@ -109,7 +109,7 @@ I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https:
 
 # Deprecation Notice
 
-**Notice:** jasmine-fixture 1.x represents a complete re-write. If you currently use jasmine-fixture and need help with its (now deprecated) `inject` method, please consult the [old README]([current README](https://github.com/searls/jasmine-fixture/blob/master/README-0.x.md)) file.
+**Notice:** jasmine-fixture 1.x represents a complete re-write. If you currently use jasmine-fixture and need help with its (now deprecated) `inject` method, please consult the [old README](https://github.com/searls/jasmine-fixture/blob/master/README-0.x.md) file.
 
 The `inject()` method will continue to behave as it always has for now, but will be removed at some point in the future.
 
