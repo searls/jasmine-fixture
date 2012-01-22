@@ -1,5 +1,7 @@
-# jasmine-fixture Makes injecting HTML snippets into the DOM easy & clean!
-# site: https://github.com/searls/jasmine-fixture
+###
+jasmine-fixture Makes injecting HTML snippets into the DOM easy & clean!
+site: https://github.com/searls/jasmine-fixture
+###
 (($) ->
   originalJasmineFixture = window.jasmineFixture
   originalInject = window.inject
