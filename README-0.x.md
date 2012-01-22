@@ -1,4 +1,6 @@
-# jasmine-fixture
+# jasmine-fixture 0.x
+
+** WARNING: this document describes the now-deprecated `inject` provided by jasmine-fixture. For new specs, I strongly recommend you use the new `affix` method instead, which is described in the [current README](https://github.com/searls/jasmine-fixture) **
 
 A simple script to support writing [Jasmine](http://pivotal.github.com/jasmine) by enabling you to easily inject HTML into the DOM. You can grab the latest release at the [Downloads](https://github.com/searls/jasmine-fixture/downloads) page.
 
