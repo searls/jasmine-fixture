@@ -1,7 +1,7 @@
 {
   "name": "jasmine-fixture",
   "description": "Manage HTML fixtures for jasmine specs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "keywords": [
     "jasmine",
     "bdd"
@@ -25,9 +25,11 @@
     }
   ],
   "homepage": "https://github.com/searls/jasmine-fixture",
-  "maintainers":[ {
-     "name": "Justin Searls",
-     "email": "searls@gmail.com",
-     "web": "http://about.me/searls"
-  }]
+  "maintainers": [
+    {
+      "name": "Justin Searls",
+      "email": "searls@gmail.com",
+      "web": "http://about.me/searls"
+    }
+  ]
 }
