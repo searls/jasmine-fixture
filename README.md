@@ -72,11 +72,11 @@ var $content = $container.affix('#content')
 
 Now our container with the class "container" has some content with the ID "content". Huzzah!
 
-Note that for easy assignability, affix will always return the topmost element of the thing that it just appended (which runs counter to most jQuery plugins, which return the original jQuery object).
+Note that for easy assignability, affix will always return the topmost element of the thing that it just appended, which in this example is `<div id="content"></div>` (which runs counter to most jQuery plugins, which return the original jQuery object).
 
 ## more examples
 
-I heard you wanted more examples. Here are some examples pulled from `affix`'s [specs](https://github.com/searls/jasmine-fixture/blob/master/spec/affix-spec.coffee).
+I heard you wanted more examples, so I pulled some from `affix`'s [specs](https://github.com/searls/jasmine-fixture/blob/master/spec/affix-spec.coffee).
 
 ``` coffeescript
 'span'                                                                  #<span></span>
@@ -103,7 +103,7 @@ I heard you wanted more examples. Here are some examples pulled from `affix`'s [
 
 # Thanks
 
-I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing most of this (classes, ids, elements, etc.).
+I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing most of this (classes, ids, elements, etc.). I also want to thank [Peter Kananen](https://twitter.com/#!/pkananen), for pairing with me on the initial spike of the `affix` method.
 
 # Deprecation Notice
 
