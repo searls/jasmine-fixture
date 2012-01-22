@@ -27,6 +27,7 @@ describe "jasmine-fixture 2.x", ->
       'div[class="class1 class2 class3"] span[div="div1 div2 div3"]'
       'form fieldset[name=ok] input#foo.sp1.sp1[foo="woo"][value="13"]'
       '[name="foo"][bar="baz"]'
+      'div[data-bind="my_item"]'
     ]
 
     _(EXAMPLES).each (selector) ->
