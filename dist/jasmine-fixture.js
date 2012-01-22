@@ -9,7 +9,7 @@
     window.jasmineFixture = function($) {
       var $whatsTheRootOf, applyAttributes, defaultConfiguration, defaults, init, injectContents, isReady, isString, itLooksLikeHtml, rootId, tidyUp;
       $.fn.affix = window.affix = function(selectorOptions) {
-        return _(selectorOptions.split(' ')).inject(function($parent, elementSelector) {
+        return _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
           if (elementSelector === ">") return $parent;
           return createHTMLBlock($, elementSelector).appendTo($parent);
         }, $whatsTheRootOf(this));
@@ -303,7 +303,6 @@
       var attrStrs, attrs, i, parts;
       if (ZenBlock.search(regAttrDfn) === -1) return undefined;
       attrStrs = ZenBlock.match(regAttrDfn);
-      attrStrs = attrStrs[0].match(regAttrs);
       attrs = {};
       i = 0;
       while (i < attrStrs.length) {
@@ -400,16 +399,16 @@
       }
       return undefined;
     };
-    regZenTagDfn = /([#\.\@]?[\w-]+|\[([\w!?=:"']+(="([^"]|\\")+")? {0,})+\]|\~[\w$]+=[\w$]+|&[\w$]+(=[\w$]+)?|[#\.\@]?!([^!]|\\!)+!){0,}(\{([^\}]|\\\})+\})?/i;
+    regZenTagDfn = /([#\.\@]?[\w-]+|\[([\w-!?=:"']+(="([^"]|\\")+")? {0,})+\]|\~[\w$]+=[\w$]+|&[\w$]+(=[\w$]+)?|[#\.\@]?!([^!]|\\!)+!){0,}(\{([^\}]|\\\})+\})?/i;
     regTag = /(\w+)/i;
     regId = /#([\w!]+)/i;
     regTagNotContent = /((([#\.]?[\w-]+)?(\[([\w!]+(="([^"]|\\")+")? {0,})+\])?)+)/i;
     regClasses = /(\.[\w-]+)/g;
     regClass = /\.([\w-]+)/i;
     regReference = /(@[\w$_][\w$_\d]+)/i;
-    regAttrDfn = /(\[([\w!]+(="([^"]|\\")+")? {0,})+\])/i;
-    regAttrs = /([\w!]+(="([^"]|\\")+")?)/g;
-    regAttr = /([\w!]+)(="(([^"]|\\")+)")?/i;
+    regAttrDfn = /(\[([\w-!]+(="?([^"]|\\")+"?)? {0,})+\])/ig;
+    regAttrs = /([\w-!]+(="([^"]|\\")+")?)/g;
+    regAttr = /([\w-!]+)(="?(([^"\]]|\\")+)"?)?/i;
     regCBrace = /\{(([^\}]|\\\})+)\}/i;
     regExclamation = /(?:([^\\]|^))!([^!]|\\!)+!/g;
     regEvents = /\~[\w$]+(=[\w$]+)?/g;
