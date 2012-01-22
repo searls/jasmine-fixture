@@ -173,7 +173,7 @@
                   value: value
                 };
               }
-              next = createHTMLBlock(zo, value, functions, indexes);
+              next = createHTMLBlock($, zo, value, functions, indexes);
               if (el.length !== 0) {
                 return $.each(next, function(index, value) {
                   return el.push(value);
@@ -189,7 +189,7 @@
         } else if (ZenCode.substring(0, 4) === "!if:") {
           result = parseContents("!" + obj + "!", data, indexes);
           if (result !== "undefined" || result !== "false" || result !== "") {
-            el = createHTMLBlock(zo, data, functions, indexes);
+            el = createHTMLBlock($, zo, data, functions, indexes);
           }
           ZenCode = ZenCode.substr(obj.length + 5 + forScope.length);
         }
@@ -200,7 +200,7 @@
         ZenCode = ZenCode.substr(paren.length);
         zo = ZenObject;
         zo.main = inner;
-        el = createHTMLBlock(zo, data, functions, indexes);
+        el = createHTMLBlock($, zo, data, functions, indexes);
       } else {
         blocks = ZenCode.match(regZenTagDfn);
         block = blocks[0];
@@ -209,7 +209,7 @@
           ZenCode = parseReferences(ZenCode, ZenObject);
           zo = ZenObject;
           zo.main = ZenCode;
-          return createHTMLBlock(zo, data, functions, indexes);
+          return createHTMLBlock($, zo, data, functions, indexes);
         }
         block = parseContents(block, data, indexes);
         blockClasses = parseClasses(block);
@@ -249,13 +249,13 @@
           }
           zo = ZenObject;
           zo.main = zc;
-          els = $(createHTMLBlock(zo, data, functions, indexes));
+          els = $(createHTMLBlock($, zo, data, functions, indexes));
           els.appendTo(el);
         }
         if (ZenCode.charAt(0) === "+") {
           zo = ZenObject;
           zo.main = ZenCode.substr(1);
-          el2 = createHTMLBlock(zo, data, functions, indexes);
+          el2 = createHTMLBlock($, zo, data, functions, indexes);
           $.each(el2, function(index, value) {
             return el.push(value);
           });

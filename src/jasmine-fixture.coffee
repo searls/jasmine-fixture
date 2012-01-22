@@ -156,7 +156,7 @@ createHTMLBlock = ( ->
             zo.main = zc
             indexes[indexName] = index  if indexName isnt `undefined`
             value = value: value  unless $.isPlainObject(value)
-            next = createHTMLBlock(zo, value, functions, indexes)
+            next = createHTMLBlock($, zo, value, functions, indexes)
             unless el.length is 0
               $.each next, (index, value) ->
                 el.push value
@@ -166,7 +166,7 @@ createHTMLBlock = ( ->
           ZenCode = ""
       else if ZenCode.substring(0, 4) is "!if:"
         result = parseContents("!" + obj + "!", data, indexes)
-        el = createHTMLBlock(zo, data, functions, indexes)  if result isnt "undefined" or result isnt "false" or result isnt ""
+        el = createHTMLBlock($, zo, data, functions, indexes)  if result isnt "undefined" or result isnt "false" or result isnt ""
         ZenCode = ZenCode.substr(obj.length + 5 + forScope.length)
       ZenObject.main = ZenCode
     else if ZenCode.charAt(0) is "("
@@ -175,7 +175,7 @@ createHTMLBlock = ( ->
       ZenCode = ZenCode.substr(paren.length)
       zo = ZenObject
       zo.main = inner
-      el = createHTMLBlock(zo, data, functions, indexes)
+      el = createHTMLBlock($, zo, data, functions, indexes)
     else
       blocks = ZenCode.match(regZenTagDfn)
       block = blocks[0]
@@ -184,7 +184,7 @@ createHTMLBlock = ( ->
         ZenCode = parseReferences(ZenCode, ZenObject)
         zo = ZenObject
         zo.main = ZenCode
-        return createHTMLBlock(zo, data, functions, indexes)
+        return createHTMLBlock($, zo, data, functions, indexes)
       block = parseContents(block, data, indexes)
       blockClasses = parseClasses(block)
       blockId = regId.exec(block)[1]  if regId.test(block)
@@ -219,12 +219,12 @@ createHTMLBlock = ( ->
           ZenCode = ZenCode.substr(len)
         zo = ZenObject
         zo.main = zc
-        els = $(createHTMLBlock(zo, data, functions, indexes))
+        els = $(createHTMLBlock($, zo, data, functions, indexes))
         els.appendTo el
       if ZenCode.charAt(0) is "+"
         zo = ZenObject
         zo.main = ZenCode.substr(1)
-        el2 = createHTMLBlock(zo, data, functions, indexes)
+        el2 = createHTMLBlock($, zo, data, functions, indexes)
         $.each el2, (index, value) ->
           el.push value
     ret = el
