@@ -9,21 +9,22 @@ describe "jasmine-fixture 2.x", ->
           $(this.actual).length > 0 and $result.is(this.actual)
 
     EXAMPLES = [
+      'span'
       '.foo'
-      '.bar'
       '#baz'
-      'h1'
-      'div b'
+      'h1.foo'
+      'h2#baz'
+      'h3#zing.zoom'
+      'h4.zoom#zing'
+      'div span ul li'
       'a b c d e f g h i j k l m n o p q r s t u v w x y z'
       '.boom.bang.pow#whoosh'
       '#foo .panda'
       'input#man .restroom'
       '.pants.zipper'
-      'span#spaghetti.sauce'
-      'article.sauce#spaghetti'
-      'foo > bar'
+      'foo > bar > baz'
       'input[value="12"]'
-      'form fieldset[name="ok"] input#foo.sp1.sp1[foo="woo"][value="13"]'
+      'form fieldset[name=ok] input#foo.sp1.sp1[foo="woo"][value="13"]'
       '[name="foo"][bar="baz"]'
     ]
 
@@ -35,10 +36,10 @@ describe "jasmine-fixture 2.x", ->
       Given -> @$result = affix('div')
       Then -> expect(@$result).toIs('div')
 
-    context "multiple attrs", ->
-      Given -> @$result = affix('[name="foo"][bar="baz"]')
-      Then -> expect($('body')).toHas('[name="foo"][bar="baz"]')
-      Then -> expect(@$result).toIs('[name="foo"][bar="baz"]')
+    context "raw attrs", ->
+      Given -> @$result = affix('[name=foo]')
+      Then -> expect($('body')).toHas('[name=foo]')
+      Then -> expect(@$result).toIs('[name=foo]')
 
     context "chaining", ->
       Given -> @$container = affix('.container')

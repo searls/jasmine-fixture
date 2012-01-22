@@ -338,9 +338,9 @@ createHTMLBlock = ( ->
   regClasses = /(\.[\w-]+)/g
   regClass = /\.([\w-]+)/i
   regReference = /(@[\w$_][\w$_\d]+)/i
-  regAttrDfn = /(\[([\w!]+(="([^"]|\\")+")? {0,})+\])/ig
+  regAttrDfn = /(\[([\w!]+(="?([^"]|\\")+"?)? {0,})+\])/ig
   regAttrs = /([\w!]+(="([^"]|\\")+")?)/g
-  regAttr = /([\w!]+)(="(([^"]|\\")+)")?/i
+  regAttr = /([\w!]+)(="?(([^"\]]|\\")+)"?)?/i
   regCBrace = /\{(([^\}]|\\\})+)\}/i
   regExclamation = /(?:([^\\]|^))!([^!]|\\!)+!/g
   regEvents = /\~[\w$]+(=[\w$]+)?/g
