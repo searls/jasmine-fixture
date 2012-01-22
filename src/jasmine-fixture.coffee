@@ -258,7 +258,6 @@ createHTMLBlock = ( ->
   parseAttributes = (ZenBlock, data) ->
     return `undefined`  if ZenBlock.search(regAttrDfn) is -1
     attrStrs = ZenBlock.match(regAttrDfn)
-    attrStrs = attrStrs[0].match(regAttrs)
     attrs = {}
     i = 0
 
@@ -339,7 +338,7 @@ createHTMLBlock = ( ->
   regClasses = /(\.[\w-]+)/g
   regClass = /\.([\w-]+)/i
   regReference = /(@[\w$_][\w$_\d]+)/i
-  regAttrDfn = /(\[([\w!]+(="([^"]|\\")+")? {0,})+\])/i
+  regAttrDfn = /(\[([\w!]+(="([^"]|\\")+")? {0,})+\])/ig
   regAttrs = /([\w!]+(="([^"]|\\")+")?)/g
   regAttr = /([\w!]+)(="(([^"]|\\")+)")?/i
   regCBrace = /\{(([^\}]|\\\})+)\}/i

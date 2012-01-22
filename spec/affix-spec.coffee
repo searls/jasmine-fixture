@@ -33,6 +33,11 @@ describe "jasmine-fixture 2.x", ->
     context "a plain old div", ->
       Given -> @$result = affix('div')
       Then -> expect(@$result).toIs('div')
+
+    context "multiple attrs", ->
+      Given -> @$result = affix('[name="foo"][bar="baz"]')
+      Then -> expect(@$result).toIs('[name=foo][bar=baz]')
+
     context "chaining", ->
       Given -> @$container = affix('.container')
       When -> @$container.affix('#content')
