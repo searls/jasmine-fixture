@@ -1,7 +1,7 @@
 {
   "name": "jasmine-fixture",
   "description": "Manage HTML fixtures for jasmine specs",
-  "version": "0.0.8",
+  "version": "0.0.0",
   "keywords": [
     "jasmine",
     "bdd"
