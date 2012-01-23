@@ -31,6 +31,7 @@ describe "jasmine-fixture 1.x", ->
       'div[data-bind="my_item"]'                                              #<div data-bind="my_item"></div>
       '.ui-dialog[style="width: 1px; height: 5px"]'                           #<div style="width: 1px; height: 5px" class="ui-dialog"></div>
       '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
+      '#blah-blah'
     ]
 
     _(EXAMPLES).each (selector) ->
