@@ -51,6 +51,10 @@ describe "jasmine-fixture 1.x", ->
       Given -> @$result = affix('table.sp_record tbody tr')
       Then -> expect(@$result).toIs('table')
 
+    context "a siblings!", ->
+      Given -> @$result = affix('div h1+h2')
+      Then -> expect(@$result.find('h1').siblings('h2')).toIs("h2")
+
     context "chaining", ->
       Given -> @$container = affix('.container')
       When -> @$result = @$container.affix('#content')
