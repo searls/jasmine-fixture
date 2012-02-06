@@ -1,5 +1,7 @@
 # jasmine-fixture
 
+[![Build Status](https://secure.travis-ci.org/searls/jasmine-fixture.png)](http://travis-ci.org/searls/jasmine-fixture)
+
 jasmine-fixture helps you write specs that interact with the DOM by making it easier to inject (and then clean up) HTML fixtures using a syntax that's just like jQuery's selectors. (As a result, it requires jQuery.)
 
 **[Download the latest version here](https://github.com/searls/jasmine-fixture/archives/master)**.
