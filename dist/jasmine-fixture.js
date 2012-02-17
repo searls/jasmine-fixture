@@ -1,6 +1,6 @@
 
 /*
-jasmine-fixture @@VERSION@@
+jasmine-fixture 1.0.3
 Makes injecting HTML snippets into the DOM easy & clean!
 site: https://github.com/searls/jasmine-fixture
 */

@@ -14,7 +14,7 @@ GEM
       jasmine-core (~> 1.1.beta)
       multi_json
       rainbow
-    js_rake_tasks (0.0.1)
+    js_rake_tasks (0.0.3)
       git (~> 1.2.5)
       json_pure (~> 1.6.1)
       semver (~> 1.0.1)
