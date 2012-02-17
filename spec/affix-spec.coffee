@@ -34,7 +34,7 @@ describe "jasmine-fixture 1.x", ->
       '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
     ]
 
-    _(EXAMPLES).each (selector) ->
+    for selector in EXAMPLES
       Then -> expect(selector).toInjectProperly()
       Then -> expect($('body')).not.toHas(selector)
 

@@ -1,6 +1,7 @@
 
 /*
-jasmine-fixture Makes injecting HTML snippets into the DOM easy & clean!
+jasmine-fixture @@VERSION@@
+Makes injecting HTML snippets into the DOM easy & clean!
 site: https://github.com/searls/jasmine-fixture
 */
 
@@ -8,13 +9,27 @@ site: https://github.com/searls/jasmine-fixture
   var createHTMLBlock;
 
   (function($) {
-    var jasmineFixture, originalAffix, originalInject, originalJasmineFixture;
-    originalJasmineFixture = window.jasmineFixture;
-    originalInject = window.inject;
-    originalAffix = window.affix;
-    window.jasmineFixture = function($) {
+    var jasmineFixture, originalAffix, originalInject, originalJasmineFixture, root, _;
+    root = this;
+    originalJasmineFixture = root.jasmineFixture;
+    originalInject = root.inject;
+    originalAffix = root.affix;
+    _ = function(list) {
+      return {
+        inject: function(iterator, memo) {
+          var item, _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = list.length; _i < _len; _i++) {
+            item = list[_i];
+            _results.push(memo = iterator(memo, item));
+          }
+          return _results;
+        }
+      };
+    };
+    root.jasmineFixture = function($) {
       var $whatsTheRootOf, applyAttributes, defaultConfiguration, defaults, init, injectContents, isReady, isString, itLooksLikeHtml, rootId, tidyUp;
-      $.fn.affix = window.affix = function(selectorOptions) {
+      $.fn.affix = root.affix = function(selectorOptions) {
         var $top;
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
@@ -75,9 +90,9 @@ site: https://github.com/searls/jasmine-fixture
           return defaults = $.extend({}, defaultConfiguration);
         },
         noConflict: function() {
-          window.jasmineFixture = originalJasmineFixture;
-          window.inject = originalInject;
-          window.affix = originalAffix;
+          root.jasmineFixture = originalJasmineFixture;
+          root.inject = originalInject;
+          root.affix = originalAffix;
           return this;
         }
       };
@@ -135,8 +150,8 @@ site: https://github.com/searls/jasmine-fixture
       return $.jasmine;
     };
     if ($) {
-      jasmineFixture = window.jasmineFixture($);
-      return window.inject = window.inject || jasmineFixture.inject;
+      jasmineFixture = root.jasmineFixture($);
+      return root.inject = root.inject || jasmineFixture.inject;
     }
   })(jQuery);
 

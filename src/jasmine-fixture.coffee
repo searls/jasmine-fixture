@@ -4,14 +4,20 @@ Makes injecting HTML snippets into the DOM easy & clean!
 site: https://github.com/searls/jasmine-fixture
 ###
 (($) ->
-  originalJasmineFixture = window.jasmineFixture
-  originalInject = window.inject
-  originalAffix = window.affix
+  root = @
 
-  window.jasmineFixture = ($) ->
+  originalJasmineFixture = root.jasmineFixture
+  originalInject = root.inject
+  originalAffix = root.affix
+
+  _ = (list) ->
+    inject: (iterator, memo) ->
+      memo = iterator(memo, item) for item in list
+
+  root.jasmineFixture = ($) ->
     #--------------------------------------------------------
     # #affix (jasmine-fixture 1.x)
-    $.fn.affix = window.affix = (selectorOptions) ->
+    $.fn.affix = root.affix = (selectorOptions) ->
       $top=null
       _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
@@ -68,9 +74,9 @@ site: https://github.com/searls/jasmine-fixture
         defaults = $.extend({}, defaultConfiguration)
 
       noConflict: ->
-        window.jasmineFixture = originalJasmineFixture
-        window.inject = originalInject
-        window.affix = originalAffix
+        root.jasmineFixture = originalJasmineFixture
+        root.inject = originalInject
+        root.affix = originalAffix
         this
 
     $.fn.inject = (html) ->
@@ -112,8 +118,8 @@ site: https://github.com/searls/jasmine-fixture
     $.jasmine
 
   if $
-    jasmineFixture = window.jasmineFixture($)
-    window.inject = window.inject or jasmineFixture.inject
+    jasmineFixture = root.jasmineFixture($)
+    root.inject = root.inject or jasmineFixture.inject
 ) jQuery
 
 
