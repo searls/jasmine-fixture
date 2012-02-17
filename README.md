@@ -1,3 +1,5 @@
+# REQUIRES UNDERSCORE.JS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 # jasmine-fixture
 
 [![Build Status](https://secure.travis-ci.org/searls/jasmine-fixture.png)](http://travis-ci.org/searls/jasmine-fixture)
