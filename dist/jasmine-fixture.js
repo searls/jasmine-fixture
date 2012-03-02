@@ -239,7 +239,7 @@ site: https://github.com/searls/jasmine-fixture
           return createHTMLBlock($, zo, data, functions, indexes);
         }
         block = parseContents(block, data, indexes);
-        blockClasses = parseClasses(block);
+        blockClasses = parseClasses($, block);
         if (regId.test(block)) blockId = regId.exec(block)[1];
         blockAttrs = parseAttributes(block, data);
         blockTag = (block.charAt(0) === "{" ? "span" : "div");
@@ -342,7 +342,7 @@ site: https://github.com/searls/jasmine-fixture
       }
       return attrs;
     };
-    parseClasses = function(ZenBlock) {
+    parseClasses = function($, ZenBlock) {
       var classes, clsString, i;
       ZenBlock = ZenBlock.match(regTagNotContent)[0];
       if (ZenBlock.search(regClasses) === -1) return undefined;

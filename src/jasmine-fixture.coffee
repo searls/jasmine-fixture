@@ -196,7 +196,7 @@ createHTMLBlock = ( ->
         zo.main = ZenCode
         return createHTMLBlock($, zo, data, functions, indexes)
       block = parseContents(block, data, indexes)
-      blockClasses = parseClasses(block)
+      blockClasses = parseClasses($,block)
       blockId = regId.exec(block)[1]  if regId.test(block)
       blockAttrs = parseAttributes(block, data)
       blockTag = (if block.charAt(0) is "{" then "span" else "div")
@@ -280,7 +280,7 @@ createHTMLBlock = ( ->
       attrs[parts[1]] = parseContents(parts[3], data)  if parts[3] isnt `undefined`
       i++
     attrs
-  parseClasses = (ZenBlock) ->
+  parseClasses = ($,ZenBlock) ->
     ZenBlock = ZenBlock.match(regTagNotContent)[0]
     return `undefined`  if ZenBlock.search(regClasses) is -1
     classes = ZenBlock.match(regClasses)
