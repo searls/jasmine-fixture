@@ -60,3 +60,22 @@ describe "jasmine-fixture 1.x", ->
       When -> @$result = @$container.affix('#content')
       Then -> expect(@$container).toHas('#content')
       Then -> expect(@$result).toIs('#content')
+
+    context "lists and stuff", ->
+      Given -> @$expected = $ """
+                              <ul>
+                               <li>
+                                 <a href="#">Menu</a>
+                                 <ul>
+                                   <li>
+                                     <a href="#">Submenu</a>
+                                   </li>
+                                 </ul>
+                               </li>
+                             </ul>
+                             """
+      When -> @$result = affix('ul>li>(a[href="#"]{Menu} + ul>li>a[href="#"]{Submenu})')
+      #Then -> expect(@$result.parent().html()).toEqual(@$expected.html())
+      Then -> console.log @$result.parent().html()
+      Then -> $('ul li a[href="#"]').text() == 'Menu'
+      Then -> $('ul li ul li a[href="#"]').text() == 'Submenu'
