@@ -1,9 +1,10 @@
 
 /*
-jasmine-fixture 1.0.3
+jasmine-fixture 1.0.4
 Makes injecting HTML snippets into the DOM easy & clean!
 site: https://github.com/searls/jasmine-fixture
 */
+
 
 (function() {
   var createHTMLBlock;
@@ -34,7 +35,9 @@ site: https://github.com/searls/jasmine-fixture
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
           var $el;
-          if (elementSelector === ">") return $parent;
+          if (elementSelector === ">") {
+            return $parent;
+          }
           $el = createHTMLBlock($, elementSelector).appendTo($parent);
           $top || ($top = $el);
           return $el;
@@ -68,7 +71,9 @@ site: https://github.com/searls/jasmine-fixture
       $.jasmine = {
         inject: function(arg, context) {
           var $toInject, config, parent;
-          if (isReady !== true) init();
+          if (isReady !== true) {
+            init();
+          }
           parent = (context ? context : $("#" + rootId));
           $toInject = void 0;
           if (itLooksLikeHtml(arg)) {
@@ -124,7 +129,9 @@ site: https://github.com/searls/jasmine-fixture
         } else if (config.text) {
           return $el.text(config.text);
         } else {
-          if (config.html) return $el.html(config.html);
+          if (config.html) {
+            return $el.html(config.html);
+          }
         }
       };
       itLooksLikeHtml = function(arg) {
@@ -168,7 +175,9 @@ site: https://github.com/searls/jasmine-fixture
         };
       }
       origZenCode = ZenCode;
-      if (indexes === undefined) indexes = {};
+      if (indexes === undefined) {
+        indexes = {};
+      }
       if (ZenCode.charAt(0) === "!" || $.isArray(data)) {
         if ($.isArray(data)) {
           forScope = ZenCode;
@@ -194,7 +203,9 @@ site: https://github.com/searls/jasmine-fixture
             $.map(arr, function(value, index) {
               var next;
               zo.main = zc;
-              if (indexName !== undefined) indexes[indexName] = index;
+              if (indexName !== undefined) {
+                indexes[indexName] = index;
+              }
               if (!$.isPlainObject(value)) {
                 value = {
                   value: value
@@ -231,7 +242,9 @@ site: https://github.com/searls/jasmine-fixture
       } else {
         blocks = ZenCode.match(regZenTagDfn);
         block = blocks[0];
-        if (block.length === 0) return "";
+        if (block.length === 0) {
+          return "";
+        }
         if (block.indexOf("@") >= 0) {
           ZenCode = parseReferences(ZenCode, ZenObject);
           zo = ZenObject;
@@ -240,13 +253,17 @@ site: https://github.com/searls/jasmine-fixture
         }
         block = parseContents(block, data, indexes);
         blockClasses = parseClasses($, block);
-        if (regId.test(block)) blockId = regId.exec(block)[1];
+        if (regId.test(block)) {
+          blockId = regId.exec(block)[1];
+        }
         blockAttrs = parseAttributes(block, data);
         blockTag = (block.charAt(0) === "{" ? "span" : "div");
         if (ZenCode.charAt(0) !== "#" && ZenCode.charAt(0) !== "." && ZenCode.charAt(0) !== "{") {
           blockTag = regTag.exec(block)[1];
         }
-        if (block.search(regCBrace) !== -1) blockHTML = block.match(regCBrace)[1];
+        if (block.search(regCBrace) !== -1) {
+          blockHTML = block.match(regCBrace)[1];
+        }
         blockAttrs = $.extend(blockAttrs, {
           id: blockId,
           "class": blockClasses,
@@ -293,9 +310,13 @@ site: https://github.com/searls/jasmine-fixture
     };
     bindData = function(ZenCode, el, data) {
       var datas, i, split;
-      if (ZenCode.search(regDatas) === 0) return el;
+      if (ZenCode.search(regDatas) === 0) {
+        return el;
+      }
       datas = ZenCode.match(regDatas);
-      if (datas === null) return el;
+      if (datas === null) {
+        return el;
+      }
       i = 0;
       while (i < datas.length) {
         split = regData.exec(datas[i]);
@@ -310,9 +331,13 @@ site: https://github.com/searls/jasmine-fixture
     };
     bindEvents = function(ZenCode, el, functions) {
       var bindings, fn, i, split;
-      if (ZenCode.search(regEvents) === 0) return el;
+      if (ZenCode.search(regEvents) === 0) {
+        return el;
+      }
       bindings = ZenCode.match(regEvents);
-      if (bindings === null) return el;
+      if (bindings === null) {
+        return el;
+      }
       i = 0;
       while (i < bindings.length) {
         split = regEvent.exec(bindings[i]);
@@ -328,7 +353,9 @@ site: https://github.com/searls/jasmine-fixture
     };
     parseAttributes = function(ZenBlock, data) {
       var attrStrs, attrs, i, parts;
-      if (ZenBlock.search(regAttrDfn) === -1) return undefined;
+      if (ZenBlock.search(regAttrDfn) === -1) {
+        return undefined;
+      }
       attrStrs = ZenBlock.match(regAttrDfn);
       attrs = {};
       i = 0;
@@ -345,7 +372,9 @@ site: https://github.com/searls/jasmine-fixture
     parseClasses = function($, ZenBlock) {
       var classes, clsString, i;
       ZenBlock = ZenBlock.match(regTagNotContent)[0];
-      if (ZenBlock.search(regClasses) === -1) return undefined;
+      if (ZenBlock.search(regClasses) === -1) {
+        return undefined;
+      }
       classes = ZenBlock.match(regClasses);
       clsString = "";
       i = 0;
@@ -357,14 +386,20 @@ site: https://github.com/searls/jasmine-fixture
     };
     parseContents = function(ZenBlock, data, indexes) {
       var html;
-      if (indexes === undefined) indexes = {};
+      if (indexes === undefined) {
+        indexes = {};
+      }
       html = ZenBlock;
-      if (data === undefined) return html;
+      if (data === undefined) {
+        return html;
+      }
       while (regExclamation.test(html)) {
         html = html.replace(regExclamation, function(str, str2) {
           var begChar, fn, val;
           begChar = "";
-          if (str.indexOf("!for:") > 0 || str.indexOf("!if:") > 0) return str;
+          if (str.indexOf("!for:") > 0 || str.indexOf("!if:") > 0) {
+            return str;
+          }
           if (str.charAt(0) !== "!") {
             begChar = str.charAt(0);
             str = str.substring(2, str.length - 1);
@@ -381,10 +416,16 @@ site: https://github.com/searls/jasmine-fixture
     };
     parseEnclosure = function(ZenCode, open, close, count) {
       var index, ret;
-      if (close === undefined) close = open;
+      if (close === undefined) {
+        close = open;
+      }
       index = 1;
-      if (count === undefined) count = (ZenCode.charAt(0) === open ? 1 : 0);
-      if (count === 0) return;
+      if (count === undefined) {
+        count = (ZenCode.charAt(0) === open ? 1 : 0);
+      }
+      if (count === 0) {
+        return;
+      }
       while (count > 0 && index < ZenCode.length) {
         if (ZenCode.charAt(index) === close && ZenCode.charAt(index - 1) !== "\\") {
           count--;
@@ -414,7 +455,9 @@ site: https://github.com/searls/jasmine-fixture
       }
       forCode = parseEnclosure(ZenCode, "!");
       ZenCode = ZenCode.substr(forCode.length);
-      if (ZenCode.charAt(0) === "(") return parseEnclosure(ZenCode, "(", ")");
+      if (ZenCode.charAt(0) === "(") {
+        return parseEnclosure(ZenCode, "(", ")");
+      }
       tag = ZenCode.match(regZenTagDfn)[0];
       ZenCode = ZenCode.substr(tag.length);
       if (ZenCode.length === 0 || ZenCode.charAt(0) === "+") {
