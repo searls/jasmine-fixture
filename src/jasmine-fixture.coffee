@@ -120,7 +120,7 @@ site: https://github.com/searls/jasmine-fixture
   if $
     jasmineFixture = root.jasmineFixture($)
     root.inject = root.inject or jasmineFixture.inject
-) jQuery
+)(window.jQuery)
 
 
 createHTMLBlock = ( ->

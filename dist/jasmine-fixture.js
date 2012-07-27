@@ -1,6 +1,6 @@
 
 /*
-jasmine-fixture 1.0.4
+jasmine-fixture 1.0.5
 Makes injecting HTML snippets into the DOM easy & clean!
 site: https://github.com/searls/jasmine-fixture
 */
@@ -160,7 +160,7 @@ site: https://github.com/searls/jasmine-fixture
       jasmineFixture = root.jasmineFixture($);
       return root.inject = root.inject || jasmineFixture.inject;
     }
-  })(jQuery);
+  })(window.jQuery);
 
   createHTMLBlock = (function() {
     var bindData, bindEvents, parseAttributes, parseClasses, parseContents, parseEnclosure, parseReferences, parseVariableScope, regAttr, regAttrDfn, regAttrs, regCBrace, regClass, regClasses, regData, regDatas, regEvent, regEvents, regExclamation, regId, regReference, regTag, regTagNotContent, regZenTagDfn;
