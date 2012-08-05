@@ -478,7 +478,7 @@ site: https://github.com/searls/jasmine-fixture
     regReference = /(@[\w$_][\w$_\d]+)/i;
     regAttrDfn = /(\[([\w-!]+(="?([^"]|\\")+"?)? {0,})+\])/ig;
     regAttrs = /([\w-!]+(="([^"]|\\")+")?)/g;
-    regAttr = /([\w-!]+)(="?(([^"\]]|\\")+)"?)?/i;
+    regAttr = /([\w-!]+)(="?((([\w]+\[.*?\])|[^"\]]|\\")+)"?)?/i;
     regCBrace = /\{(([^\}]|\\\})+)\}/i;
     regExclamation = /(?:([^\\]|^))!([^!]|\\!)+!/g;
     regEvents = /\~[\w$]+(=[\w$]+)?/g;

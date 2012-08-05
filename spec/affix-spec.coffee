@@ -32,6 +32,7 @@ describe "jasmine-fixture 1.x", ->
       'div[data-bind="my_item"]'                                              #<div data-bind="my_item"></div>
       '.ui-dialog[style="width: 1px; height: 5px"]'                           #<div style="width: 1px; height: 5px" class="ui-dialog"></div>
       '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
+      'select[name="date[year]"]'                                             #<select name="date[year]"></select>
     ]
 
     for selector in EXAMPLES
@@ -60,3 +61,4 @@ describe "jasmine-fixture 1.x", ->
       When -> @$result = @$container.affix('#content')
       Then -> expect(@$container).toHas('#content')
       Then -> expect(@$result).toIs('#content')
+
