@@ -1,12 +1,13 @@
 {
   "name": "jasmine-fixture",
-  "description": "Manage HTML fixtures for jasmine specs",
+  "description": "Makes injecting HTML snippets into the DOM easy & clean!",
   "version": "1.0.5",
   "keywords": [
     "jasmine",
     "bdd"
   ],
   "dependencies": {
+    "lineman": "~0.11.0",
     "https://github.com/pivotal/jasmine": "Any"
   },
   "bugs": {

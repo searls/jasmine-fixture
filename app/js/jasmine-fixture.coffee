@@ -1,8 +1,3 @@
-###
-jasmine-fixture @@VERSION@@
-Makes injecting HTML snippets into the DOM easy & clean!
-site: https://github.com/searls/jasmine-fixture
-###
 (($) ->
   root = @
 
