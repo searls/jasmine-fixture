@@ -60,3 +60,7 @@ describe "jasmine-fixture 1.x", ->
       When -> @$result = @$container.affix('#content')
       Then -> expect(@$container).toHas('#content')
       Then -> expect(@$result).toIs('#content')
+
+    context "non-ids with hash symbol", ->
+      Given -> affix('a[data-target-pane="#pane-id"]')
+      Then -> expect($('body')).not.toHas('#pane-id')
