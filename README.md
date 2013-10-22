@@ -4,7 +4,7 @@
 
 jasmine-fixture helps you write specs that interact with the DOM by making it easier to inject (and then clean up) HTML fixtures using a syntax that's just like jQuery's selectors. (As a result, it requires jQuery.)
 
-**[Download the latest version here](https://github.com/searls/jasmine-fixture/releases/1.0.5/1737/jasmine-fixture.js)**.
+**[Download the latest version here](https://github.com/searls/jasmine-fixture/releases)**.
 
 # The concept
 
