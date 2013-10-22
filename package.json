@@ -7,7 +7,7 @@
     "bdd"
   ],
   "dependencies": {
-    "lineman": "~0.11.0"
+    "lineman": ">= 0.11.0"
   },
   "bugs": {
     "web": "https://github.com/searls/jasmine-fixture/issues"
