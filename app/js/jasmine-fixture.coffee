@@ -348,7 +348,19 @@ createHTMLBlock = ( ->
   regReference = /(@[\w$_][\w$_\d]+)/i
   regAttrDfn = /(\[([\w-!]+(="?([^"]|\\")+"?)? {0,})+\])/ig
   regAttrs = /([\w-!]+(="([^"]|\\")+")?)/g
-  regAttr = /([\w-!]+)(="?(([^"\]]|\\")+)"?)?/i
+  regAttr = ///
+             ([\w-!]+)  #one or more combination of words, - (dashes), and ! (bang)
+             (="?            # equals sign (=), followed by optional double quote
+             (             
+                             # one or more of the following three:
+             (                            
+             ([\w]+\[.*?\])  # 1) one or more words, followed by brackets with any chars
+             |[^"\]]         # 2) anything except double quote and closing bracket 
+             | \\")+         # 3) double quote
+             )
+             "?)             # optional double quote
+             ?   # .... the preceding parenthesized expression zero (0) or one (1) time
+        ///i
   regCBrace = /\{(([^\}]|\\\})+)\}/i
   regExclamation = /(?:([^\\]|^))!([^!]|\\!)+!/g
   regEvents = /\~[\w$]+(=[\w$]+)?/g
