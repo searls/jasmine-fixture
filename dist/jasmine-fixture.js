@@ -7,10 +7,11 @@
     __slice = [].slice;
 
   (function($) {
-    var jasmineFixture, originalAffix, originalJasmineFixture, root, _;
+    var jasmineFixture, originalAffix, originalCreate, originalJasmineFixture, root, _;
     root = this;
     originalJasmineFixture = root.jasmineFixture;
     originalAffix = root.affix;
+    originalCreate = root.create;
     _ = function(list) {
       return {
         inject: function(iterator, memo) {
@@ -25,8 +26,8 @@
       };
     };
     root.jasmineFixture = function($) {
-      var $whatsTheRootOf;
-      $.fn.affix = root.affix = function(selectorOptions) {
+      var $whatsTheRootOf, create;
+      $.fn.create = root.create = create = function(selectorOptions, attach) {
         var $top;
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
@@ -34,11 +35,17 @@
           if (elementSelector === ">") {
             return $parent;
           }
-          $el = createHTMLBlock($, elementSelector).appendTo($parent);
+          $el = createHTMLBlock($, elementSelector);
+          if (attach) {
+            $el.appendTo($parent);
+          }
           $top || ($top = $el);
           return $el;
         }, $whatsTheRootOf(this));
         return $top;
+      };
+      $.fn.affix = root.affix = function(selectorOptions) {
+        return create.call(this, selectorOptions, true);
       };
       $whatsTheRootOf = function(that) {
         if (that.jquery != null) {
@@ -56,6 +63,7 @@
         noConflict: function() {
           root.jasmineFixture = originalJasmineFixture;
           root.affix = originalAffix;
+          root.create = originalCreate;
           return this;
         }
       };
