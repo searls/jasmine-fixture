@@ -6,18 +6,14 @@
     "jasmine",
     "bdd"
   ],
-  "dependencies": {
-    "lineman": ">= 0.11.0"
-  },
+  "dependencies": {},
   "bugs": {
-    "web": "https://github.com/searls/jasmine-fixture/issues"
+    "url": "https://github.com/searls/jasmine-fixture/issues"
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/searls/jasmine-fixture.git"
-    }
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/searls/jasmine-fixture.git"
+  },
   "licenses": [
     {
       "name": "Apache License 2.0",
@@ -31,5 +27,10 @@
       "email": "searls@gmail.com",
       "web": "http://about.me/searls"
     }
-  ]
+  ],
+  "devDependencies": {
+    "lineman": ">= 0.21.0",
+    "grunt": "~0.4.2",
+    "grunt-write-bower-json": "0.0.1"
+  }
 }
