@@ -29,8 +29,11 @@
     }
   ],
   "devDependencies": {
-    "lineman": ">= 0.21.0",
-    "grunt": "~0.4.2",
-    "grunt-write-bower-json": "0.0.1"
+    "lineman": "~0.24.8",
+    "lineman-lib": "0.0.1",
+    "grunt-jasmine-bundle": "~0.1.4",
+    "testem": "~0.6.7",
+    "coffee-script": "~1.6.3",
+    "underscore": "~1.6.0"
   }
 }

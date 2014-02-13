@@ -16,40 +16,31 @@
 libConfig = require('./lib')
 
 module.exports = (lineman) ->
-  grunt = lineman.grunt
-  _ = grunt.util._
+  _ = require("underscore")
   app = lineman.config.application
+  grunt = lineman.grunt
 
-  if libConfig.generateBowerJson
-    app.loadNpmTasks.push("grunt-write-bower-json")
-    app.appendTasks.dist.push("writeBowerJson")
-
-  app.uglify.js.files = _({}).tap (config) ->
-    config["dist/#{grunt.file.readJSON('package.json').name}.min.js"] = "<%= files.js.uncompressedDist %>"
-
-  meta:
-    banner: """
-            /* <%= pkg.name %> - <%= pkg.version %>
-             * <%= pkg.description || pkg.description %>
-             * <%= pkg.homepage %>
-             */
-
-            """
-
-  removeTasks:
-    common: ["less", "handlebars", "jst", "images:dev", "webfonts:dev", "pages:dev"]
-    dev: ["server"]
-    dist: ["cssmin", "images:dist", "webfonts:dist", "pages:dist"]
-
+  # We want to include matcher wrapper ahead of given.
   concat:
     uncompressedDist:
-      options:
-        banner: "<%= meta.banner %>"
-      src: _([
-        ("<%= files.js.vendor %>" if libConfig.includeVendorInDistribution),
-        "<%= files.coffee.generated %>",
-        "<%= files.js.app %>"
-      ]).compact()
-      dest: "<%= files.js.uncompressedDist %>"
+      src: _(app.concat.uncompressedDist.src).without("<%= files.coffee.generated %>").concat("<%= files.coffee.generated %>")
 
+  loadNpmTasks: app.loadNpmTasks.concat("grunt-jasmine-bundle")
+
+  removeTasks:
+    common: ["jshint"]
+
+  hooks:
+    loadNpmTasks:
+      afterLoad:
+        "grunt-jasmine-bundle": ->
+          grunt.renameTask("spec", "nodeSpec")
+
+  nodeSpec:
+    e2e:
+      options:
+        minijasminenode:
+          showColors: true
+        helpers: "spec-e2e/helpers/**/*.{js,coffee}"
+        specs: ["spec-e2e/**/*.{js,coffee}", "!spec-e2e/tmp/**"]
 

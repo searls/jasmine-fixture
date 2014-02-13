@@ -7,14 +7,18 @@
 #
 
 module.exports = (lineman) ->
-  grunt = lineman.grunt
+
 
   js:
-    uncompressedDist: "dist/#{grunt.file.readJSON('package.json').name}.js"
     spec: [
       "spec/**/*.js",
       "!spec/prereq/**"
     ]
+    specHelpers: [
+      "spec/helpers/jasmine-matcher-wrapper.js",
+      "spec/helpers/**/*.js"
+    ]
+
   coffee:
     spec: [
       "spec/**/*.coffee",
