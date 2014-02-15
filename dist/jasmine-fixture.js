@@ -1,4 +1,4 @@
-/* jasmine-fixture - 1.1.0
+/* jasmine-fixture - 1.2.0
  * Makes injecting HTML snippets into the DOM easy & clean!
  * https://github.com/searls/jasmine-fixture
  */
@@ -7,9 +7,10 @@
     __slice = [].slice;
 
   (function($) {
-    var jasmineFixture, originalAffix, originalJasmineFixture, root, _;
+    var ewwSideEffects, jasmineFixture, originalAffix, originalJasmineDotFixture, originalJasmineFixture, root, _, _ref;
     root = this;
     originalJasmineFixture = root.jasmineFixture;
+    originalJasmineDotFixture = (_ref = root.jasmine) != null ? _ref.fixture : void 0;
     originalAffix = root.affix;
     _ = function(list) {
       return {
@@ -25,8 +26,11 @@
       };
     };
     root.jasmineFixture = function($) {
-      var $whatsTheRootOf, createNodes;
-      $.fn.createNodes = createNodes = function(selectorOptions, attach) {
+      var $whatsTheRootOf, affix, create, jasmineFixture, noConflict;
+      affix = function(selectorOptions) {
+        return create.call(this, selectorOptions, true);
+      };
+      create = function(selectorOptions, attach) {
         var $top;
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
@@ -43,8 +47,15 @@
         }, $whatsTheRootOf(this));
         return $top;
       };
-      $.fn.affix = root.affix = function(selectorOptions) {
-        return createNodes.call(this, selectorOptions, true);
+      noConflict = function() {
+        var currentJasmineFixture, _ref1;
+        currentJasmineFixture = jasmine.fixture;
+        root.jasmineFixture = originalJasmineFixture;
+        if ((_ref1 = root.jasmine) != null) {
+          _ref1.fixture = originalJasmineDotFixture;
+        }
+        root.affix = originalAffix;
+        return currentJasmineFixture;
       };
       $whatsTheRootOf = function(that) {
         if (that.jquery != null) {
@@ -55,17 +66,23 @@
           return $('<div id="jasmine_content"></div>').appendTo('body');
         }
       };
-      afterEach(function() {
+      jasmineFixture = {
+        affix: affix,
+        create: create,
+        noConflict: noConflict
+      };
+      ewwSideEffects(jasmineFixture);
+      return jasmineFixture;
+    };
+    ewwSideEffects = function(jasmineFixture) {
+      var _ref1;
+      if ((_ref1 = root.jasmine) != null) {
+        _ref1.fixture = jasmineFixture;
+      }
+      $.fn.affix = root.affix = jasmineFixture.affix;
+      return afterEach(function() {
         return $('#jasmine_content').remove();
       });
-      $.jasmine = {
-        noConflict: function() {
-          root.jasmineFixture = originalJasmineFixture;
-          root.affix = originalAffix;
-          return this;
-        }
-      };
-      return $.jasmine;
     };
     if ($) {
       return jasmineFixture = root.jasmineFixture($);
