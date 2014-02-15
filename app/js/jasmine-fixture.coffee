@@ -3,6 +3,7 @@
 
   originalJasmineFixture = root.jasmineFixture
   originalAffix = root.affix
+  originalCreate = root.create
 
   _ = (list) ->
     inject: (iterator, memo) ->
@@ -10,16 +11,22 @@
 
   root.jasmineFixture = ($) ->
     #--------------------------------------------------------
-    # #affix (jasmine-fixture 1.x)
-    $.fn.affix = root.affix = (selectorOptions) ->
+    # #create (jasmine-fixture 1.x)
+    $.fn.create = root.create = (selectorOptions, attach) ->
       $top=null
       _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
-        $el = createHTMLBlock($,elementSelector).appendTo($parent)
+        $el = createHTMLBlock($,elementSelector)
+        $el.appendTo($parent) if $parent
         $top ||= $el
         $el
-      , $whatsTheRootOf(this))
+      , if attach then $whatsTheRootOf(@) else null)
       $top
+
+    #--------------------------------------------------------
+    # #affix (jasmine-fixture 1.x)
+    $.fn.affix = root.affix = (selectorOptions) ->
+      create(selectorOptions, true)
 
     $whatsTheRootOf = (that) ->
       if that.jquery?
@@ -36,6 +43,7 @@
       noConflict: ->
         root.jasmineFixture = originalJasmineFixture
         root.affix = originalAffix
+        root.create = originalCreate
         this
 
     $.jasmine
