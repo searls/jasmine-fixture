@@ -25,8 +25,8 @@
       };
     };
     root.jasmineFixture = function($) {
-      var $whatsTheRootOf;
-      $.fn.affix = root.affix = function(selectorOptions) {
+      var $whatsTheRootOf, createNodes;
+      $.fn.createNodes = createNodes = function(selectorOptions, attach) {
         var $top;
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
@@ -34,11 +34,17 @@
           if (elementSelector === ">") {
             return $parent;
           }
-          $el = createHTMLBlock($, elementSelector).appendTo($parent);
+          $el = createHTMLBlock($, elementSelector);
+          if (attach || $top) {
+            $el.appendTo($parent);
+          }
           $top || ($top = $el);
           return $el;
         }, $whatsTheRootOf(this));
         return $top;
+      };
+      $.fn.affix = root.affix = function(selectorOptions) {
+        return createNodes.call(this, selectorOptions, true);
       };
       $whatsTheRootOf = function(that) {
         if (that.jquery != null) {
