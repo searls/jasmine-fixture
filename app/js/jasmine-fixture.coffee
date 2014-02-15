@@ -43,9 +43,9 @@
   if $
     jasmineFixture = root.jasmineFixture($)
   else
-    throw new Error("jasmine-fixture requires jQuery or Zepto or Ender or similar drop-in at $")
+    throw new Error("jasmine-fixture requires jQuery to be defined at window.jQuery or window.$")
 
-)(window.jQuery || window.Zepto || window.ender || window.$)
+)(window.jQuery || window.$)
 
 
 createHTMLBlock = ( ->
