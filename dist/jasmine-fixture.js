@@ -1,9 +1,10 @@
-/* jasmine-fixture - 1.0.8
+/* jasmine-fixture - 1.1.0
  * Makes injecting HTML snippets into the DOM easy & clean!
  * https://github.com/searls/jasmine-fixture
  */
 (function() {
-  var createHTMLBlock;
+  var createHTMLBlock,
+    __slice = [].slice;
 
   (function($) {
     var jasmineFixture, originalAffix, originalJasmineFixture, root, _;
@@ -63,9 +64,18 @@
     if ($) {
       return jasmineFixture = root.jasmineFixture($);
     } else {
-      throw new Error("jasmine-fixture requires jQuery or Zepto or Ender or similar drop-in at $");
+      return root.affix = function() {
+        var nowJQueryExists;
+        nowJQueryExists = window.jQuery || window.$;
+        if (nowJQueryExists != null) {
+          jasmineFixture = root.jasmineFixture(nowJQueryExists);
+          return affix.call.apply(affix, [this].concat(__slice.call(arguments)));
+        } else {
+          throw new Error("jasmine-fixture requires jQuery to be defined at window.jQuery or window.$");
+        }
+      };
     }
-  })(window.jQuery || window.Zepto || window.ender || window.$);
+  })(window.jQuery || window.$);
 
   createHTMLBlock = (function() {
     var bindData, bindEvents, parseAttributes, parseClasses, parseContents, parseEnclosure, parseReferences, parseVariableScope, regAttr, regAttrDfn, regAttrs, regCBrace, regClass, regClasses, regData, regDatas, regEvent, regEvents, regExclamation, regId, regReference, regTag, regTagNotContent, regZenTagDfn;
