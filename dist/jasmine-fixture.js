@@ -7,11 +7,10 @@
     __slice = [].slice;
 
   (function($) {
-    var jasmineFixture, originalAffix, originalCreate, originalJasmineFixture, root, _;
+    var jasmineFixture, originalAffix, originalJasmineFixture, root, _;
     root = this;
     originalJasmineFixture = root.jasmineFixture;
     originalAffix = root.affix;
-    originalCreate = root.create;
     _ = function(list) {
       return {
         inject: function(iterator, memo) {
@@ -26,8 +25,8 @@
       };
     };
     root.jasmineFixture = function($) {
-      var $whatsTheRootOf, create;
-      $.fn.create = root.create = create = function(selectorOptions, attach) {
+      var $whatsTheRootOf, createNodes;
+      $.fn.createNodes = createNodes = function(selectorOptions, attach) {
         var $top;
         $top = null;
         _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
@@ -45,7 +44,7 @@
         return $top;
       };
       $.fn.affix = root.affix = function(selectorOptions) {
-        return create.call(this, selectorOptions, true);
+        return createNodes.call(this, selectorOptions, true);
       };
       $whatsTheRootOf = function(that) {
         if (that.jquery != null) {
@@ -63,7 +62,6 @@
         noConflict: function() {
           root.jasmineFixture = originalJasmineFixture;
           root.affix = originalAffix;
-          root.create = originalCreate;
           return this;
         }
       };
