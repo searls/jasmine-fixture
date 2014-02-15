@@ -2,7 +2,6 @@
   root = @
 
   originalJasmineFixture = root.jasmineFixture
-  originalInject = root.inject
   originalAffix = root.affix
 
   _ = (list) ->
@@ -33,89 +32,20 @@
     afterEach ->
       $('#jasmine_content').remove()
 
-    #--------------------------------------------------------
-    # #inject (jasmine-fixture 0.x)
-    isReady = false
-    rootId = "specContainer"
-    defaultConfiguration =
-      el: "div"
-      cssClass: ""
-      id: ""
-      text: ""
-      html: ""
-      defaultAttribute: "class"
-      attrs: {}
-    defaults = $.extend({}, defaultConfiguration)
     $.jasmine =
-      inject: (arg, context) ->
-        init()  if isReady isnt true
-        parent = (if context then context else $("#" + rootId))
-        $toInject = undefined
-        if itLooksLikeHtml(arg)
-          $toInject = $(arg)
-        else
-          config = $.extend({}, defaults, arg,
-            userString: arg
-          )
-          $toInject = $("<" + config.el + "></" + config.el + ">")
-          applyAttributes $toInject, config
-          injectContents $toInject, config
-        $toInject.appendTo parent
-
-      configure: (config) ->
-        $.extend defaults, config
-
-      restoreDefaults: ->
-        defaults = $.extend({}, defaultConfiguration)
-
       noConflict: ->
         root.jasmineFixture = originalJasmineFixture
-        root.inject = originalInject
         root.affix = originalAffix
         this
-
-    $.fn.inject = (html) ->
-      $.jasmine.inject html, $(this)
-
-    applyAttributes = ($html, config) ->
-      attrs = $.extend({},
-        id: config.id
-        class: config["class"] or config.cssClass
-      , config.attrs)
-      attrs[config.defaultAttribute] = config.userString  if isString(config.userString)
-      for key of attrs
-        $html.attr key, attrs[key]  if attrs[key]
-
-    injectContents = ($el, config) ->
-      if config.text and config.html
-        throw "Error: because they conflict, you may only configure inject() to set `html` or `text`, not both! \n\nHTML was: " + config.html + " \n\n Text was: " + config.text
-      else if config.text
-        $el.text config.text
-      else $el.html config.html  if config.html
-
-    itLooksLikeHtml = (arg) ->
-      isString(arg) and arg.indexOf("<") isnt -1
-
-    isString = (arg) ->
-      arg and arg.constructor is String
-
-    init = ->
-      $("body").append "<div id=\"" + rootId + "\"></div>"
-      isReady = true
-
-    tidyUp = ->
-      $("#" + rootId).remove()
-      isReady = false
-
-    $(($) -> init())
-    afterEach -> tidyUp()
 
     $.jasmine
 
   if $
     jasmineFixture = root.jasmineFixture($)
-    root.inject = root.inject or jasmineFixture.inject
-)(window.jQuery)
+  else
+    throw new Error("jasmine-fixture requires jQuery or Zepto or Ender or similar drop-in at $")
+
+)(window.jQuery || window.Zepto || window.ender || window.$)
 
 
 createHTMLBlock = ( ->
@@ -351,11 +281,11 @@ createHTMLBlock = ( ->
   regAttr = ///
              ([\w-!]+)  #one or more combination of words, - (dashes), and ! (bang)
              (="?            # equals sign (=), followed by optional double quote
-             (             
+             (
                              # one or more of the following three:
-             (                            
+             (
              ([\w]+\[.*?\])  # 1) one or more words, followed by brackets with any chars
-             |[^"\]]         # 2) anything except double quote and closing bracket 
+             |[^"\]]         # 2) anything except double quote and closing bracket
              | \\")+         # 3) double quote
              )
              "?)             # optional double quote

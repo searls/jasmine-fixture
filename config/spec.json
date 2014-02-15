@@ -4,6 +4,7 @@
   "launch_in_ci" : ["PhantomJS"],
   "src_files" : [
     "spec/prereq/**/*.js",
+    "vendor/js/jquery-1.8.3.js",
     "generated/js/app.js",
     "generated/js/spec.js"
   ]

@@ -18,6 +18,7 @@ module.exports = (lineman) ->
       "spec/helpers/jasmine-matcher-wrapper.js",
       "spec/helpers/**/*.js"
     ]
+    vendor: []
 
   coffee:
     spec: [

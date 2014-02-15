@@ -19,7 +19,7 @@ var matchers = {
   },
   toInjectProperly: function() {
     $result = affix(this.actual)
-    return $(this.actual).length > 0 && $.contains($result.parent(),this.actual)
+    return $(this.actual).length > 0 && $('#jasmine_content').find(this.actual).length > 0
   }
 };
 

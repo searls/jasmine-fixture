@@ -1,9 +1,6 @@
 describe "jasmine-fixture 1.x", ->
 
   describe "affix", ->
-    beforeEach ->
-      jasmineFixture(jQuery_1_6_4)
-
     EXAMPLES = [
        'article'                                                              #<article></article>
        '.foo'                                                                 #<div class="foo"></div>

@@ -108,10 +108,3 @@ I heard you wanted more examples, so I pulled some from `affix`'s [specs](https:
 # Thanks
 
 I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing most of this (classes, ids, elements, etc.). I also want to thank [Peter Kananen](https://twitter.com/#!/pkananen), for pairing with me on the initial spike of the `affix` method.
-
-# Deprecation Notice
-
-**Notice:** jasmine-fixture 1.x represents a complete re-write. If you currently use jasmine-fixture and need help with its (now deprecated) `inject` method, please consult the [old README](https://github.com/searls/jasmine-fixture/blob/master/README-0.x.md) file.
-
-The `inject()` method will continue to behave as it always has for now, but will be removed at some point in the future.
-
