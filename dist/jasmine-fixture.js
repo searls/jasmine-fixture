@@ -35,7 +35,7 @@
             return $parent;
           }
           $el = createHTMLBlock($, elementSelector);
-          if (attach) {
+          if (attach || $top) {
             $el.appendTo($parent);
           }
           $top || ($top = $el);

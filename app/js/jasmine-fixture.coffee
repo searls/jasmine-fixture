@@ -16,7 +16,7 @@
       _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
         $el = createHTMLBlock($,elementSelector)
-        $el.appendTo($parent) if attach
+        $el.appendTo($parent) if attach || $top
         $top ||= $el
         $el
       , $whatsTheRootOf(@))
