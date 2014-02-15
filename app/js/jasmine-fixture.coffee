@@ -2,6 +2,7 @@
   root = @
 
   originalJasmineFixture = root.jasmineFixture
+  originalJasmineDotFixture = root.jasmine?.fixture
   originalAffix = root.affix
 
   _ = (list) ->
@@ -9,9 +10,10 @@
       memo = iterator(memo, item) for item in list
 
   root.jasmineFixture = ($) ->
-    #--------------------------------------------------------
-    # #createNodes (jasmine-fixture 1.x)
-    $.fn.createNodes = createNodes = (selectorOptions, attach) ->
+    affix = (selectorOptions) ->
+      create.call(this, selectorOptions, true)
+
+    create = (selectorOptions, attach) ->
       $top=null
       _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
@@ -22,10 +24,12 @@
       , $whatsTheRootOf(@))
       $top
 
-    #--------------------------------------------------------
-    # #affix (jasmine-fixture 1.x)
-    $.fn.affix = root.affix = (selectorOptions) ->
-      createNodes.call(this, selectorOptions, true)
+    noConflict = ->
+      currentJasmineFixture = jasmine.fixture
+      root.jasmineFixture = originalJasmineFixture
+      root.jasmine?.fixture = originalJasmineDotFixture
+      root.affix = originalAffix
+      currentJasmineFixture
 
     $whatsTheRootOf = (that) ->
       if that.jquery?
@@ -35,16 +39,15 @@
       else
         $('<div id="jasmine_content"></div>').appendTo('body')
 
+    jasmineFixture = {affix, create, noConflict}
+    ewwSideEffects(jasmineFixture)
+    return jasmineFixture
+
+  ewwSideEffects = (jasmineFixture) ->
+    root.jasmine?.fixture = jasmineFixture
+    $.fn.affix = root.affix = jasmineFixture.affix
     afterEach ->
       $('#jasmine_content').remove()
-
-    $.jasmine =
-      noConflict: ->
-        root.jasmineFixture = originalJasmineFixture
-        root.affix = originalAffix
-        this
-
-    $.jasmine
 
   if $
     jasmineFixture = root.jasmineFixture($)

@@ -3,7 +3,8 @@ describe("#noConflict", function() {
   beforeEach(function() {
     cache = {
       jasmineFixture: window.jasmineFixture,
-      affix: window.affix
+      affix: window.affix,
+      jasmineDotFixture: jasmine.fixture
     };
 
     subject = window.jasmineFixture($);
@@ -14,6 +15,7 @@ describe("#noConflict", function() {
   afterEach(function() {
     window.jasmineFixture = cache.jasmineFixture;
     window.affix = cache.affix;
+    jasmine.fixture = cache.jasmineDotFixture;
   });
 
   it("returns itself when noConflicted", function() {
