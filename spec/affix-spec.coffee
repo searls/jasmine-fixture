@@ -1,4 +1,4 @@
-describe "jasmine-fixture 1.x", ->
+describe "jasmine-fixture", ->
 
   describe "affix", ->
     EXAMPLES = [
