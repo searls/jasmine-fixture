@@ -103,6 +103,7 @@ I heard you wanted more examples, so I pulled some from `affix`'s [specs](https:
 'div[data-bind="my_item"]'                                              #<div data-bind="my_item"></div>
 '.ui-dialog[style="width: 1px; height: 5px"]'                           #<div style="width: 1px; height: 5px" class="ui-dialog"></div>
 '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
+'div h1+h2'                                                             #<div><h1></h1><h2></h2></div>
 ```
 
 # Thanks
