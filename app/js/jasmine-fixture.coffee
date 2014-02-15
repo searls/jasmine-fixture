@@ -43,7 +43,13 @@
   if $
     jasmineFixture = root.jasmineFixture($)
   else
-    throw new Error("jasmine-fixture requires jQuery to be defined at window.jQuery or window.$")
+    root.affix = ->
+      nowJQueryExists = window.jQuery || window.$
+      if nowJQueryExists?
+        jasmineFixture = root.jasmineFixture(nowJQueryExists)
+        affix.call(this, arguments...)
+      else
+        throw new Error("jasmine-fixture requires jQuery to be defined at window.jQuery or window.$")
 
 )(window.jQuery || window.$)
 
