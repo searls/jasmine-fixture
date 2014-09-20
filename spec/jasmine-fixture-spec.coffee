@@ -25,6 +25,7 @@ describe "jasmine.fixture", ->
      '.ui-dialog[style="width: 1px; height: 5px"]'                         #<div style="width: 1px; height: 5px" class="ui-dialog"></div>
      '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'    #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
      'select[name="date[year]"]'                                           #<select name="date[year]"></select>
+     'input[name="some[thing][foo]"]'
   ]
 
   describe ".affix", ->
