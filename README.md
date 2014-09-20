@@ -105,6 +105,13 @@ I heard you wanted more examples, so I pulled some from `affix`'s [specs](https:
 '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'      #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
 'div h1+h2'                                                             #<div><h1></h1><h2></h2></div>
 ```
+# Contributing
+
+1. `npm install -g lineman` if you don't already have lineman installed.
+2. `lineman build`
+3. `lineman spec` to run the fast, isolated specs.
+4. Add your feature or bug fix on a feature branch, with tests.
+5. Submit a pull request.
 
 # Thanks
 
