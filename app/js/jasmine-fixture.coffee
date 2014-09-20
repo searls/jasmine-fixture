@@ -299,9 +299,9 @@ createHTMLBlock = ( ->
              (
                              # one or more of the following three:
              (
-             ([\w]+(\[.*?\])+)  # 1) one or more words, followed by at least one bracketed attribute
-             |[^"\]]         # 2) anything except double quote and closing bracket
-             | \\")+         # 3) double quote
+             ([\w]+(\[.*?\])+)  # 1. one or more words, followed by at least one bracketed attribute
+             |[^"\]]            # 2. anything except double quote and closing bracket
+             | \\")+            # 3. double quote
              )
              "?)             # optional double quote
              ?   # .... the preceding parenthesized expression zero (0) or one (1) time
