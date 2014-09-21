@@ -29,7 +29,7 @@
     }
   ],
   "devDependencies": {
-    "lineman": "~0.24.8",
+    "lineman": ">= 0.24",
     "lineman-lib": "0.0.1",
     "grunt-jasmine-bundle": "~0.1.4",
     "testem": "~0.6.7",
