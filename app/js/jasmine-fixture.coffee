@@ -288,7 +288,10 @@ createHTMLBlock = ( ->
   regTag = /(\w+)/i
   regId = /(?:^|\b)#([\w-!]+)/i
   regTagNotContent = /((([#\.]?[\w-]+)?(\[([\w!]+(="([^"]|\\")+")? {0,})+\])?)+)/i
-  regClasses = /(\.[\w-]+)/g
+  ###
+   See lookahead syntax (?!) at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp 
+  ###
+  regClasses = /(\.[\w-]+)(?!["\w])/g
   regClass = /\.([\w-]+)/i
   regReference = /(@[\w$_][\w$_\d]+)/i
   regAttrDfn = /(\[([\w-!]+(="?([^"]|\\")+"?)? {0,})+\])/ig

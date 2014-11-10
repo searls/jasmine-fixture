@@ -26,6 +26,7 @@ describe "jasmine.fixture", ->
      '#toddler .hidden.toy input[name="toyName"][value="cuddle bunny"]'    #<div id="toddler"><div class="hidden toy"><input name="toyName" value="cuddle bunny"></div></div>
      'select[name="date[year]"]'                                           #<select name="date[year]"></select>
      'input[name="some[thing][foo]"]'
+     'input[type="text"][value="4.99"][class="class-name"]'
   ]
 
   describe ".affix", ->
