@@ -1,7 +1,7 @@
 {
   "name": "jasmine-fixture",
   "description": "Makes injecting HTML snippets into the DOM easy & clean!",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "keywords": [
     "jasmine",
     "bdd"
