@@ -15,7 +15,7 @@
 
     create = (selectorOptions, attach) ->
       $top=null
-      _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
+      _(selectorOptions.split(/[ ](?![^\{]*\})(?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
         $el = createHTMLBlock($,elementSelector)
         $el.appendTo($parent) if attach || $top
@@ -289,7 +289,7 @@ createHTMLBlock = ( ->
   regId = /(?:^|\b)#([\w-!]+)/i
   regTagNotContent = /((([#\.]?[\w-]+)?(\[([\w!]+(="([^"]|\\")+")? {0,})+\])?)+)/i
   ###
-   See lookahead syntax (?!) at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp 
+   See lookahead syntax (?!) at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
   ###
   regClasses = /(\.[\w-]+)(?!["\w])/g
   regClass = /\.([\w-]+)/i
