@@ -40,6 +40,10 @@ describe "jasmine.fixture", ->
       Given -> affix('a[data-target-pane="#pane-id"]')
       Then -> expect($('body')).not.toHas('#pane-id')
 
+    context "text node with space char", ->
+      Given -> affix('a.link{Text With Space}')
+      Then -> expect($('.link').text()).toEqual('Text With Space')
+
   describe ".create", ->
     Given -> @subject = jasmine.fixture
 
@@ -72,3 +76,7 @@ describe "jasmine.fixture", ->
       When -> @$result = @$container.affix('#content')
       Then -> expect(@$container).toHas('#content')
       And -> expect(@$result).toIs('#content')
+
+    context "text node with space char", ->
+      Given -> @result = @subject.create('a.link{Text With Space}')
+      Then -> @result.find('With').length == 0
