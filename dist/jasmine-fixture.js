@@ -1,4 +1,4 @@
-/* jasmine-fixture - 1.2.2
+/* jasmine-fixture - 1.3.0
  * Makes injecting HTML snippets into the DOM easy & clean!
  * https://github.com/searls/jasmine-fixture
  */
@@ -33,7 +33,7 @@
       create = function(selectorOptions, attach) {
         var $top;
         $top = null;
-        _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
+        _(selectorOptions.split(/[ ](?![^\{]*\})(?=[^\]]*?(?:\[|$))/)).inject(function($parent, elementSelector) {
           var $el;
           if (elementSelector === ">") {
             return $parent;

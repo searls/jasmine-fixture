@@ -15,7 +15,7 @@
 
     create = (selectorOptions, attach) ->
       $top=null
-      _(selectorOptions.split(/[ ](?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
+      _(selectorOptions.split(/[ ](?![^\{]*\})(?=[^\]]*?(?:\[|$))/)).inject(($parent, elementSelector) ->
         return $parent if elementSelector == ">"
         $el = createHTMLBlock($,elementSelector)
         $el.appendTo($parent) if attach || $top
