@@ -1,5 +1,5 @@
 (($) ->
-  root = @
+  root = `(1, eval)('this')`
 
   originalJasmineFixture = root.jasmineFixture
   originalJasmineDotFixture = root.jasmine?.fixture
@@ -289,7 +289,7 @@ createHTMLBlock = ( ->
   regId = /(?:^|\b)#([\w-!]+)/i
   regTagNotContent = /((([#\.]?[\w-]+)?(\[([\w!]+(="([^"]|\\")+")? {0,})+\])?)+)/i
   ###
-   See lookahead syntax (?!) at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp 
+   See lookahead syntax (?!) at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
   ###
   regClasses = /(\.[\w-]+)(?!["\w])/g
   regClass = /\.([\w-]+)/i
