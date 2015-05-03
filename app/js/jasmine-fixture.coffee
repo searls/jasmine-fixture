@@ -32,7 +32,7 @@
       currentJasmineFixture
 
     $whatsTheRootOf = (that) ->
-      if that.jquery?
+      if that?.jquery?
         that
       else if $('#jasmine_content').length > 0
         $('#jasmine_content')
