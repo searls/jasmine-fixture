@@ -39,15 +39,16 @@
       else
         $('<div id="jasmine_content"></div>').appendTo('body')
 
+    ewwSideEffects = (jasmineFixture) ->
+      root.jasmine?.fixture = jasmineFixture
+      $.fn.affix = root.affix = jasmineFixture.affix
+      afterEach ->
+        $('#jasmine_content').remove()
+
     jasmineFixture = {affix, create, noConflict}
     ewwSideEffects(jasmineFixture)
     return jasmineFixture
 
-  ewwSideEffects = (jasmineFixture) ->
-    root.jasmine?.fixture = jasmineFixture
-    $.fn.affix = root.affix = jasmineFixture.affix
-    afterEach ->
-      $('#jasmine_content').remove()
 
   if $
     jasmineFixture = root.jasmineFixture($)
