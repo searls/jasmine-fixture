@@ -1,4 +1,4 @@
-/* jasmine-fixture - 1.3.3
+/* jasmine-fixture - 1.3.4
  * Makes injecting HTML snippets into the DOM easy & clean!
  * https://github.com/searls/jasmine-fixture
  */
@@ -7,7 +7,7 @@
     __slice = [].slice;
 
   (function($) {
-    var ewwSideEffects, jasmineFixture, originalAffix, originalJasmineDotFixture, originalJasmineFixture, root, _, _ref;
+    var jasmineFixture, originalAffix, originalJasmineDotFixture, originalJasmineFixture, root, _, _ref;
     root = (1, eval)('this');
     originalJasmineFixture = root.jasmineFixture;
     originalJasmineDotFixture = (_ref = root.jasmine) != null ? _ref.fixture : void 0;
@@ -26,7 +26,7 @@
       };
     };
     root.jasmineFixture = function($) {
-      var $whatsTheRootOf, affix, create, jasmineFixture, noConflict;
+      var $whatsTheRootOf, affix, create, ewwSideEffects, jasmineFixture, noConflict;
       affix = function(selectorOptions) {
         return create.call(this, selectorOptions, true);
       };
@@ -66,6 +66,16 @@
           return $('<div id="jasmine_content"></div>').appendTo('body');
         }
       };
+      ewwSideEffects = function(jasmineFixture) {
+        var _ref1;
+        if ((_ref1 = root.jasmine) != null) {
+          _ref1.fixture = jasmineFixture;
+        }
+        $.fn.affix = root.affix = jasmineFixture.affix;
+        return afterEach(function() {
+          return $('#jasmine_content').remove();
+        });
+      };
       jasmineFixture = {
         affix: affix,
         create: create,
@@ -73,16 +83,6 @@
       };
       ewwSideEffects(jasmineFixture);
       return jasmineFixture;
-    };
-    ewwSideEffects = function(jasmineFixture) {
-      var _ref1;
-      if ((_ref1 = root.jasmine) != null) {
-        _ref1.fixture = jasmineFixture;
-      }
-      $.fn.affix = root.affix = jasmineFixture.affix;
-      return afterEach(function() {
-        return $('#jasmine_content').remove();
-      });
     };
     if ($) {
       return jasmineFixture = root.jasmineFixture($);
