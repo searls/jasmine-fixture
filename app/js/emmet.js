@@ -293,6 +293,7 @@ define(function(require, exports, module) {
 
 		// expose some useful data for plugin authors
 		actions: actions,
+		parser: parser,
 		file: file,
 		preferences: preferences,
 		resources: resources,
@@ -306,6 +307,7 @@ define(function(require, exports, module) {
 		}
 	};
 });
+
 },{"./action/main":"action/main.js","./assets/caniuse":"assets/caniuse.js","./assets/htmlMatcher":"assets/htmlMatcher.js","./assets/logger":"assets/logger.js","./assets/preferences":"assets/preferences.js","./assets/profile":"assets/profile.js","./assets/resources":"assets/resources.js","./assets/tabStops":"assets/tabStops.js","./parser/abbreviation":"parser/abbreviation.js","./plugin/file":"plugin/file.js","./utils/action":"utils/action.js","./utils/common":"utils/common.js","./utils/editor":"utils/editor.js"}],"action/balance.js":[function(require,module,exports){
 /**
  * HTML pair matching (balancing) actions
@@ -15058,7 +15060,7 @@ define(function(require, exports, module) {
 
 			for (var i = 0, il = rules.length; i < il; i++) {
 				if (rules[i].start > pos) {
-					return rules[isBackward ? i - 1 : i].shift(offset);
+					return rules[isBackward && i > 0 ? i - 1 : i].shift(offset);
 				}
 			}
 		},
