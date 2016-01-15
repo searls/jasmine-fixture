@@ -115,4 +115,10 @@ I heard you wanted more examples, so I pulled some from `affix`'s [specs](https:
 
 # Thanks
 
-I want to offer thanks to Mike Kent, whose [JavaScript port of ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing most of this (classes, ids, elements, etc.). I also want to thank [Peter Kananen](https://twitter.com/#!/pkananen), for pairing with me on the initial spike of the `affix` method.
+* Thanks to Sergey Chikuyonok <serge.che@gmail.com> for creating
+[Emmet](http://emmet.io), which is what jasmine-fixture 2.x (& up?) uses to
+parse css selectors into markup
+* I want to offer thanks to Mike Kent, whose [JavaScript port of
+ZenCoding](https://github.com/zodoz/jquery-ZenCoding) was the basis for parsing
+most of this (classes, ids, elements, etc.) in version 1.x.
+* I also want to thank [Peter Kananen](https://twitter.com/#!/pkananen), for pairing with me on the initial spike of the `affix` method.

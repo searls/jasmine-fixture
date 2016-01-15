@@ -1,7 +1,9 @@
 describe "jasmine.fixture", ->
+  Then "no emmet global", -> `(1, eval)('this')`.hasOwnProperty('emmet') == false
 
   EXAMPLES = [
      'article'                                                             #<article></article>
+     'backlog-item'                                                        #<backlog-item></backlog-item>
      '.foo'                                                                #<div class="foo"></div>
      '.foo-hah'                                                            #<div class="foo-hah"></div>
      '#blah-blah'                                                          #<div id="blah-blah"></div>
