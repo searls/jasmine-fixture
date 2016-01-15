@@ -10,6 +10,11 @@ module.exports = (lineman) ->
 
 
   js:
+    app: [
+      "app/js/emmet-no-conflict.js",
+      "app/js/emmet.js",
+      "app/js/**/*.js"
+    ]
     spec: [
       "spec/**/*.js",
       "!spec/prereq/**"

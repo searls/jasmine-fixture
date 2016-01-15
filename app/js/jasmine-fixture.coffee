@@ -4,6 +4,13 @@
   originalJasmineFixture = root.jasmineFixture
   originalJasmineDotFixture = root.jasmine?.fixture
   originalAffix = root.affix
+  removeEmmetGlobal = (->
+    delete root.emmet
+    if root.hasOwnProperty('__jasmineFixtureEmmetNoConflict')
+      root.emmet = root.__jasmineFixtureEmmetNoConflict
+      delete root.__jasmineFixtureEmmetNoConflict
+  )()
+
 
   _ = (list) ->
     inject: (iterator, memo) ->
