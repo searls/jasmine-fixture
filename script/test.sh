@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+
+set -e
 
 echo "<----- browser - jasmine 1.x - jq 1.8 - 'lineman spec-ci'"
 lineman spec-ci
