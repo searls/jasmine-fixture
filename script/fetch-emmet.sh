@@ -2,9 +2,9 @@
 
 set -e
 
-mkdir tmp
+mkdir -p tmp
 echo "<---- cloning emmet to tmp/emmet"
-git clone git@github.com:emmetio/emmet.git tmp/emmet
+git clone git@github.com:emmetio/emmet.git tmp/emmet || true
 cd tmp/emmet
 latestRelease="$(git describe --tags `git rev-list --tags --max-count=1`)"
 echo "<---- checkout latest tag: '$latestRelease'"
