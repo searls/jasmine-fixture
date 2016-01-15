@@ -1,10 +1,2 @@
 language: node_js
-node_js:
-- 0.10
-script:
-  - lineman spec-ci
-  - lineman spec-ci -- -f config/spec-jasmine2.json
-  - lineman spec-ci -- -f config/spec-jq-1.11.json
-  - lineman spec-ci -- -f config/spec-jq-2.1.json
-  # - MAJOR_JASMINE_VERSION=1 lineman grunt nodeSpec
-  # - MAJOR_JASMINE_VERSION=2 lineman grunt nodeSpec
+node_js: 0.10
