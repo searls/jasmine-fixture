@@ -13,7 +13,8 @@ echo "<---- installing dependencies"
 npm i
 echo "<---- building emmet"
 $(npm bin)/gulp app
-cp dist/emmet-app.js ../../app/js/emmet.js
 cd ../..
+awk '{print "// " $0}' tmp/emmet/LICENSE > app/js/emmet.js
+cat tmp/emmet/dist/emmet-app.js >> app/js/emmet.js
 git commit -m "emmet $latestRelease" -- app/js/emmet.js || true
 rm -rf tmp
